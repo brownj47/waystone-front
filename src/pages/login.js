@@ -1,63 +1,108 @@
 import React from 'react';
 
 
-function Login() {
-    return (
-        <>
-        <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
 
-            <div class="w-full max-w-md space-y-8">
-                <div>
-                    <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600" alt="Workflow">
-                        <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
-                        <p class="mt-2 text-center text-sm text-gray-600">
-                            Or
-                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
-                        </p>
-                </div>
-                <form class="mt-8 space-y-6" action="#" method="POST">
-                    <input type="hidden" name="remember" value="true">
-                        <div class="-space-y-px rounded-md shadow-sm">
-                            <div>
-                                <label for="email-address" class="sr-only">Email address</label>
-                                <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address">
-                            </div>
-                            <div>
-                                <label for="password" class="sr-only">Password</label>
-                                <input id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Password">
-                            </div>
-                        </div>
 
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                    <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
-                            </div>
+import { LockClosedIcon } from '@heroicons/react/20/solid'
 
-                            <div class="text-sm">
-                                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
-                            </div>
-                        </div>
+export default function Login() {
+  return (
+    <>
+      {/*
+        This example requires updating your template:
 
-                        <div>
-                            <button type="submit" class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-
-                                    <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                                Sign in
-                            </button>
-                        </div>
-                </form>
+        ```
+        <html class="h-full bg-lime-50">
+        <body class="h-full">
+        ```
+      */}
+      
+      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-amber-900">
+        <div className="w-full max-w-md space-y-8">
+          <div>
+            <img
+              className="mx-auto h-12 w-auto"
+              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=lime&4hade=600"
+              alt="Workflow"
+            />
+            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-lime-500">
+              Welcome to Mordekainen's Waystone, come find your party!
+              Sign in to get started.
+            </h2>
+            <p className="mt-2 text-center text-sm text-lime-200">
+              Or{' '}
+              <a href="#" className="font-medium text-green-600 hover:text-blue-900">
+                start your 14-day free trial
+              </a>
+            </p>
+          </div>
+          <form className="mt-8 space-y-6" action="#" method="POST">
+            <input type="hidden" name="remember" defaultValue="true" />
+            <div className="-space-y-px rounded-md shadow-sm">
+              <div>
+                <label htmlFor="email-address" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="email-address"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-lime-300 px-3 py-2 text-lime-900 placeholder-lime-500 focus:z-10 focus:border-lime-200 focus:outline-none focus:ring-lime-200 sm:text-sm"
+                  placeholder="Email address"
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-lime-300 px-3 py-2 text-lime-900 placeholder-lime-500 focus:z-10 focus:border-lime-200 focus:outline-none focus:ring-lime-200 sm:text-sm"
+                  placeholder="Password"
+                />
+              </div>
             </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <input
+                  id="remember-me"
+                  name="remember-me"
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-lime-300 text-lime-400 focus:ring-lime-200"
+                />
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-lime-500">
+                  Remember me
+                </label>
+              </div>
+
+              <div className="text-sm">
+                <a href="#" className="font-medium text-lime-400 hover:text-lime-200">
+                  Forgot your password?
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-white hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
+              >
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <LockClosedIcon className="h-5 w-5 text-lime-200 group-hover:text-lime-400" aria-hidden="true" />
+                </span>
+                Sign in
+              </button>
+            </div>
+          </form>
         </div>
-        </>
-
-
-    );
+      </div>
+    </>
+  )
 }
-
-
-export default Login;
