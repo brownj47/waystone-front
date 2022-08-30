@@ -17,7 +17,7 @@ export default function Login() {
         ```
       */}
       
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-amber-900">
+      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-zinc-800">
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
@@ -77,7 +77,7 @@ export default function Login() {
                   type="checkbox"
                   className="h-4 w-4 rounded border-lime-300 text-lime-400 focus:ring-lime-200"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-lime-500">
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-lime-300">
                   Remember me
                 </label>
               </div>
