@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
-import { Popout } from './pages/Popout';
+
+import Login from './pages/login';
 
 const navigation = {
 	main: [
@@ -83,7 +84,8 @@ function App() {
 		<>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/popout" element={<Popout />} />
+				
+				<Route path="/login" element={<Login />} />
 			</Routes>
 			<footer className="bg-white">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
