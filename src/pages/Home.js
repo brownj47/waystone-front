@@ -1,7 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+
+import { Disclosure, Menu, Transition, Dialog } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Fragment, useState } from 'react';
+
+import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
+function classNames(...classes) {
+	return classes.filter(Boolean).join(' ');
+}
 
 const user = {
 	name: 'Tom Cook',
@@ -22,11 +28,12 @@ const userNavigation = [
 	{ name: 'Sign out', href: '#' },
 ];
 
-function classNames(...classes) {
+function mainclassNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
 export function Home() {
+	const [open, setOpen] = useState(true);
 	return (
 		<>
 			{/*
@@ -57,7 +64,7 @@ export function Home() {
 													<a
 														key={item.name}
 														href={item.href}
-														className={classNames(
+														className={mainclassNames(
 															item.current
 																? 'bg-gray-900 text-white'
 																: 'text-gray-300 hover:bg-gray-700 hover:text-white',
@@ -108,7 +115,7 @@ export function Home() {
 																{({ active }) => (
 																	<a
 																		href={item.href}
-																		className={classNames(
+																		className={mainclassNames(
 																			active ? 'bg-gray-100' : '',
 																			'block px-4 py-2 text-sm text-gray-700'
 																		)}
@@ -150,7 +157,7 @@ export function Home() {
 											key={item.name}
 											as="a"
 											href={item.href}
-											className={classNames(
+											className={mainclassNames(
 												item.current
 													? 'bg-gray-900 text-white'
 													: 'text-gray-300 hover:bg-gray-700 hover:text-white',
