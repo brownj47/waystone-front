@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
-
+import CreateUser from './pages/CreateUser';
 import Login from './pages/login';
 
 const navigation = {
@@ -83,9 +83,9 @@ function App() {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<Home />} />
-				
-				<Route path="/login" element={<Login />} />
+				<Route path="/home" element={<Home />} />
+				<Route path="/CreateUser" element={<CreateUser />} />
+				<Route path="/" element={<Login />} />
 			</Routes>
 			<footer className="bg-white">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">

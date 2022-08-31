@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
+import CreateUser from './CreateUser';
 
 
 
@@ -22,23 +23,26 @@ export default function Login() {
           <div>
             <img
               className="mx-auto h-12 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=lime&4hade=600"
+              // src="https://tailwindui.com/img/logos/workflow-mark.svg?color=lime&4hade=600"
+
+              src="https://i.ibb.co/zmHz8jh/waystone.png"
               alt="Workflow"
             />
-            <h2 className="mt-6 text-center text-2xl font-bold tracking-tight text-lime-500">
-              Welcome to Mordekainen's Waystone, come find your party!
-              Sign in to get started.
-            </h2>
+            <h3 className="mt-6 text-center text-2xl font-bold tracking-tight text-lime-500">
+              Welcome to Mordekainen's Waystone
+            </h3>
+            <h4 className="mt-2 text-center text-lg font-medium text-lime-500">
+              Come find your party!
+              Sign Up or Login to get started.
+            </h4>
             <div>
+            <Link to={{ pathname: `/CreateUser`}}>
               <button
                 type="submit"
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-white hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
-              >
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <LockClosedIcon className="h-5 w-5 text-lime-200 group-hover:text-lime-400" aria-hidden="true" />
-                </span>
-                Sign in
+                className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-white hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2">
+                Sign Up
               </button>
+            </Link>
             </div>
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
@@ -95,19 +99,21 @@ export default function Login() {
             </div>
 
             <div>
-              <button
+              <Link to={{ pathname: `/home`}}> <button
                 type="submit"
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-white hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-lime-200 group-hover:text-lime-400" aria-hidden="true" />
                 </span>
-                Sign in
-              </button>
+                Login
+              </button></Link>
             </div>
           </form>
         </div>
       </div>
+
+      
     </>
   )
 }
