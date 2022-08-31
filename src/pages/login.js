@@ -28,7 +28,7 @@ export default function Login() {
               src="https://i.ibb.co/zmHz8jh/waystone.png"
               alt="Workflow"
             />
-            <h3 className="mt-6 text-center text-2xl font-bold tracking-tight text-lime-500">
+            <h3 className="mt-6 text-center text-2xl font-bold tracking-tight text-zinc-800 bg-lime-400">
               Welcome to Mordekainen's Waystone
             </h3>
             <h4 className="mt-2 text-center text-lg font-medium text-lime-500">
@@ -39,7 +39,7 @@ export default function Login() {
             <Link to={{ pathname: `/CreateUser`}}>
               <button
                 type="submit"
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-white hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2">
+                className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2">
                 Sign Up
               </button>
             </Link>
@@ -101,7 +101,7 @@ export default function Login() {
             <div>
               <Link to={{ pathname: `/home`}}> <button
                 type="submit"
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-white hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
+                className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-lime-200 group-hover:text-lime-400" aria-hidden="true" />
