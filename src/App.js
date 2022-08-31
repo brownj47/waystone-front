@@ -1,8 +1,11 @@
 import logo from './logo.svg';
+import React, { useEffect,useState} from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Router, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
-import { Popout } from './pages/Popout';
+import CreateUser from './pages/CreateUser';
+import Login from './pages/login';
+import API from './utils/API';
 
 const navigation = {
 	main: [
@@ -79,12 +82,86 @@ const navigation = {
 };
 
 function App() {
+	const [user, setUser] = useState({
+		id:0,
+		email: '',
+		password: '',
+	})
+	const [token, setToken] = useState('')
+
+	useEffect(() => {
+		const storedToken = localStorage.getItem('token');
+		API.checkToken(storedToken).then(res=>{
+			if(!res.ok){
+				console.log("invalid credentials at token")
+				localStorage.removeItem('token')
+			}
+			else {
+				console.log("valid credentials at token")
+				res.json().then(data=>{
+					setToken(storedToken)
+					setUser(
+						{
+							id: data.id,
+							email: data.email,
+							password: data.password,
+						})
+				})
+			}
+		})
+	}, [])
+
+	const handleLogin= (email, password) => {
+		API.login(email, password).then(res=>{
+			if(!res.ok){
+				setUser({userId:0, email: '', password: ''});
+				setToken('');
+				return;
+			}
+			return res.json()
+		}).then(data=>{
+			console.log(data)
+			setUser({userId:data.id, email: data.email, password: data.password});
+			setToken(data.token);
+			localStorage.setItem('token', data.token);
+		})
+	}
+
+	const handleSignup = (email, password) => {
+		API.signup(email, password).then(res=>{
+			if(!res.ok){
+				setUser({userId:0, email: '', password: ''});
+				setToken('');
+				return;
+			}
+			return res.json()
+		}).then(data=>{
+			console.log(data)
+			setUser({userId:data.id, email: data.email, password: data.password});
+			setToken(data.token);
+			localStorage.setItem('token', data.token);
+		})
+	}
+
+	const handleLogout = () => {
+		localStorage.removeItem('token');
+		setUser({userId:0, email: '', password: ''});
+		setToken('');
+	}
+
+
+
 	return (
 		<>
+			
+			{/* <Navbar user={user} handleLogout={handleLogout} /> */}
 			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/popout" element={<Popout />} />
+				<Route path="/home" element={<Home />} />
+				<Route path="/CreateUser" element={<CreateUser handleSignup={handleSignup} />} />
+				<Route path="/" element={<Login userId={user.id} handleLogin = {handleLogin} />} />
+				<Route path='*' element={<h1>404 Page Not Found</h1>} />
 			</Routes>
+			
 			<footer className="bg-white">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
 					<nav
@@ -122,5 +199,7 @@ function App() {
 		</>
 	);
 }
+
+
 
 export default App;
