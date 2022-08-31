@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import CreateUser from './CreateUser';
 
@@ -22,7 +22,7 @@ export default function Login() {
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
-              className="mx-auto h-12 w-auto"
+              className="mx-auto h-12 w-auto bg-lime-800 rounded-full"
               // src="https://tailwindui.com/img/logos/workflow-mark.svg?color=lime&4hade=600"
 
               src="https://i.ibb.co/zmHz8jh/waystone.png"
@@ -91,11 +91,11 @@ export default function Login() {
                 </label>
               </div>
 
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <a href="#" className="font-medium text-lime-400 hover:text-lime-200">
                   Forgot your password?
                 </a>
-              </div>
+              </div> */}
             </div>
 
             <div>
