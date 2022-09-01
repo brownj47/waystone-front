@@ -1,11 +1,14 @@
 import logo from './logo.svg';
-import React, { useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link, Navigate, Outlet } from 'react-router-dom';
 import { Home } from './pages/Home';
 import CreateUser from './pages/CreateUser';
 import Login from './pages/login';
 import API from './utils/API';
+
+
+
 
 const navigation = {
 	main: [
@@ -19,7 +22,7 @@ const navigation = {
 	social: [
 		{
 			name: 'Facebook',
-			href: '#',
+			href: 'https://www.facebook.com/facebook/',
 			icon: (props) => (
 				<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 					<path
@@ -32,7 +35,7 @@ const navigation = {
 		},
 		{
 			name: 'Instagram',
-			href: '#',
+			href: 'https://www.instagram.com/',
 			icon: (props) => (
 				<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 					<path
@@ -45,7 +48,7 @@ const navigation = {
 		},
 		{
 			name: 'Twitter',
-			href: '#',
+			href: 'https://twitter.com/?lang=en',
 			icon: (props) => (
 				<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 					<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
@@ -54,7 +57,7 @@ const navigation = {
 		},
 		{
 			name: 'GitHub',
-			href: '#',
+			href: 'https://github.com/brownj47/waystone-front',
 			icon: (props) => (
 				<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 					<path
@@ -81,88 +84,34 @@ const navigation = {
 	],
 };
 
-function App() {
-	const [user, setUser] = useState({
-		id:0,
-		email: '',
-		password: '',
-	})
-	const [token, setToken] = useState('')
+const App = () => {
+	const [user, setUser] = useState(null);
 
-	useEffect(() => {
-		const storedToken = localStorage.getItem('token');
-		API.checkToken(storedToken).then(res=>{
-			if(!res.ok){
-				console.log("invalid credentials at token")
-				localStorage.removeItem('token')
-			}
-			else {
-				console.log("valid credentials at token")
-				res.json().then(data=>{
-					setToken(storedToken)
-					setUser(
-						{
-							id: data.id,
-							email: data.email,
-							password: data.password,
-						})
-				})
-			}
-		})
-	}, [])
+	const handleLogin = () => setUser({ id: '1'})
 
-	const handleLogin= (email, password) => {
-		API.login(email, password).then(res=>{
-			if(!res.ok){
-				setUser({userId:0, email: '', password: ''});
-				setToken('');
-				return;
-			}
-			return res.json()
-		}).then(data=>{
-			console.log(data)
-			setUser({userId:data.id, email: data.email, password: data.password});
-			setToken(data.token);
-			localStorage.setItem('token', data.token);
-		})
-	}
-
-	const handleSignup = (email, password) => {
-		API.signup(email, password).then(res=>{
-			if(!res.ok){
-				setUser({userId:0, email: '', password: ''});
-				setToken('');
-				return;
-			}
-			return res.json()
-		}).then(data=>{
-			console.log(data)
-			setUser({userId:data.id, email: data.email, password: data.password});
-			setToken(data.token);
-			localStorage.setItem('token', data.token);
-		})
-	}
-
-	const handleLogout = () => {
-		localStorage.removeItem('token');
-		setUser({userId:0, email: '', password: ''});
-		setToken('');
-	}
-
-
+	const handleLogout = () => setUser(null);
 
 	return (
-		<>
+		<>	
+
+			<Navbar />
+
+			{user ? (
+				<button onClick={handleLogout}>Logout</button>) : (<button onClick={handleLogin}>Login</button>)}
+
 			
-			{/* <Navbar user={user} handleLogout={handleLogout} /> */}
 			<Routes>
-				<Route path="/home" element={<Home />} />
-				<Route path="/CreateUser" element={<CreateUser handleSignup={handleSignup} />} />
-				<Route path="/" element={<Login userId={user.id} handleLogin = {handleLogin} />} />
+				<Route index element={<Login />} />
+				<Route path="/home" element={<ProtectedRoute user={user}><Home/></ProtectedRoute>} />
+				<Route path="/CreateUser" element={<CreateUser  />} />
+				<Route path="/login" element={<Login  />} />
 				<Route path='*' element={<h1>404 Page Not Found</h1>} />
 			</Routes>
+
 			
-			<footer className="bg-white">
+
+
+			<footer className="bg-zinc-800">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
 					<nav
 						className="-mx-5 -my-2 flex flex-wrap justify-center"
@@ -195,13 +144,43 @@ function App() {
 						&copy; 2020 Workflow, Inc. All rights reserved.
 					</p>
 				</div>
+				
 			</footer>
-			<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">  
-			</script>
+			
 		</>
 	);
 }
 
+const ProtectedRoute = ({ user, redirectPath ='/login', children, }) => {
+	if (!user) {
+		return <Navigate to={redirectPath} />
+	}
+	return children ? children: <Outlet/>;
+
+}
+
+const Navbar = () => (
+	<nav>
+		<Link to="/login"><button>Login</button></Link>
+		<Link to= "/home"><button>Home</button></Link>
+		<Link to= "/CreateUser"><button>User</button></Link>
+		<Link to= "/api">APIs</Link>
+
+	</nav>
+);
+
+const LoginPage = () => {
+	return <h2>Landing and Login (Public)</h2>
+};
+
+const HomePage = ({user}) => {
+
+	return <h2>Home (Private)</h2>
+};
+
+const CreateUserPage = () => {
+	return <h2>Create User (Public)</h2>
+};
 
 
 export default App;

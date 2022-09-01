@@ -1,7 +1,7 @@
-import React, { useEffect} from 'react';
+import React, { useRef, useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import CreateUser from './CreateUser';
-
+import handleLogin from '../App';
 
 
 import { LockClosedIcon } from '@heroicons/react/20/solid'
@@ -99,7 +99,7 @@ export default function Login() {
             </div>
 
             <div>
-              <Link to={{ pathname: `/home`}}> <button
+              <Link onClick={handleLogin} to={{ pathname: `/home`}}> <button
                 type="submit"
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
               >
