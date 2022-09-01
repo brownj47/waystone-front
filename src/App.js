@@ -175,7 +175,7 @@ function App() {
 				<Route path="*" element={<h1>404 Page Not Found</h1>} />
 			</Routes>
 
-			<footer className="bg-white">
+			<footer className=" bg-zinc-800">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
 					<nav
 						className="-mx-5 -my-2 flex flex-wrap justify-center"
@@ -185,7 +185,7 @@ function App() {
 							<div key={item.name} className="px-5 py-2">
 								<a
 									href={item.href}
-									className="text-base text-gray-500 hover:text-gray-900"
+									className="text-base text-lime-500 hover:text-gray-900"
 								>
 									{item.name}
 								</a>
@@ -197,14 +197,14 @@ function App() {
 							<a
 								key={item.name}
 								href={item.href}
-								className="text-gray-400 hover:text-gray-500"
+								className="text-lime-500 hover:text-gray-500"
 							>
 								<span className="sr-only">{item.name}</span>
 								<item.icon className="h-6 w-6" aria-hidden="true" />
 							</a>
 						))}
 					</div>
-					<p className="mt-8 text-center text-base text-gray-400">
+					<p className="mt-8 text-center text-base text-lime-500">
 						&copy; 2020 Workflow, Inc. All rights reserved.
 					</p>
 				</div>
