@@ -85,36 +85,74 @@ const navigation = {
 };
 
 const App = () => {
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState({
+		email: '',
+		password: ''
+	});
+	const [token, setToken] = useState('');
 
-	const handleLogin = ( logginer
-
-	) => { 
-		console.log(logginer.email, logginer.password);
-
+	const handleLogin = async (email, password) => {
+		console.log(email, password)
+		setUser({
+			email,
+			password
+		})
+		console.log(user)
+		fetch('http://localhost:3001/login', {
+			method: 'POST',
+			body: JSON.stringify(user),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(res => res.json()).then((data) => {
+			console.log(data)
+			if (data.token){
+				setToken(data.token)
+				localStorage.setItem('token', JSON.stringify(data.token))
+				
+			}
+		})
 	}
 
-	const handleLogout = () => setUser(null);
+	const checkToken = (tokenToCheck) => {
+		return (fetch('http://localhost:3001/checkToken', {
+			headers: {
+				'Authorization': `Bearer ${tokenToCheck}`
+			}
+		}).then(res => res.json()).then(data => {
+			console.log(data)
+			setToken(tokenToCheck)
+			// console.log(token)
+		}))
+	}
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		setToken("")
+		setUser({
+			email: '',
+			password: ''
+		})
+	};
+
+	useEffect(() => {
+		const storedToken = JSON.parse(localStorage.getItem('token'));
+		checkToken(storedToken)
+	}, [])
+
 
 	return (
-		<>	
+		<>
 
 			<Navbar />
-
-			{user ? (
-				<button onClick={handleLogout}>Logout</button>) : (<button onClick={handleLogin}>Login</button>)}
-
-			
+			<button onClick={() => { checkToken(token) }}>CheckToken</button>
+			<button onClick={handleLogout}>Login</button>
 			<Routes>
 				<Route index element={<Login />} />
-				<Route path="/home" element={<ProtectedRoute user={user}><Home/></ProtectedRoute>} />
-				<Route path="/CreateUser" element={<CreateUser  />} />
-				<Route path="/login" element={<Login  />} />
+				<Route path="/home" element={<ProtectedRoute user={user}><Home /></ProtectedRoute>} />
+				<Route path="/CreateUser" element={<CreateUser />} />
+				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
 				<Route path='*' element={<h1>404 Page Not Found</h1>} />
 			</Routes>
-
-			
-
 
 			<footer className="bg-zinc-800">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
@@ -149,43 +187,29 @@ const App = () => {
 						&copy; 2020 Workflow, Inc. All rights reserved.
 					</p>
 				</div>
-				
+
 			</footer>
-			
+
 		</>
 	);
 }
 
-const ProtectedRoute = ({ user, redirectPath ='/login', children, }) => {
+const ProtectedRoute = ({ user, redirectPath = '/login', children, }) => {
 	if (!user) {
 		return <Navigate to={redirectPath} />
 	}
-	return children ? children: <Outlet/>;
+	return children ? children : <Outlet />;
 
 }
 
 const Navbar = () => (
 	<nav>
 		<Link to="/login"><button>Login</button></Link>
-		<Link to= "/home"><button>Home</button></Link>
-		<Link to= "/CreateUser"><button>User</button></Link>
-		<Link to= "/api">APIs</Link>
+		<Link to="/home"><button>Home</button></Link>
+		<Link to="/CreateUser"><button>User</button></Link>
+		<Link to="/api">APIs</Link>
 
 	</nav>
 );
-
-const LoginPage = () => {
-	return <h2>Landing and Login (Public)</h2>
-};
-
-const HomePage = ({user}) => {
-
-	return <h2>Home (Private)</h2>
-};
-
-const CreateUserPage = () => {
-	return <h2>Create User (Public)</h2>
-};
-
 
 export default App;
