@@ -7,6 +7,12 @@ import handleLogin from '../App';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 
 export default function Login() {
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+});
+
+
   return (
     <>
       {/*
@@ -45,7 +51,8 @@ export default function Login() {
             </Link>
             </div>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form className="mt-8 space-y-6" onSubmit={(e)=>{e.preventDefault()
+             handleLogin(user)}}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
@@ -53,6 +60,7 @@ export default function Login() {
                   Email address
                 </label>
                 <input
+                  onChange={ (e)=>(setUser({ email:e.target.value, password:user.password })) }     
                   id="email-address"
                   name="email"
                   type="email"
@@ -66,7 +74,7 @@ export default function Login() {
                 <label htmlFor="password" className="sr-only">
                   Password
                 </label>
-                <input
+                <input onChange={ (e)=>(setUser({ password:e.target.value, email:user.email })) }
                   id="password"
                   name="password"
                   type="password"
@@ -99,7 +107,7 @@ export default function Login() {
             </div>
 
             <div>
-              <Link onClick={handleLogin} to={{ pathname: `/home`}}> <button
+               <button
                 type="submit"
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
               >
@@ -107,7 +115,7 @@ export default function Login() {
                   <LockClosedIcon className="h-5 w-5 text-lime-200 group-hover:text-lime-400" aria-hidden="true" />
                 </span>
                 Login
-              </button></Link>
+              </button>
             </div>
           </form>
         </div>

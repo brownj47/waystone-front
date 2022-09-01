@@ -87,7 +87,12 @@ const navigation = {
 const App = () => {
 	const [user, setUser] = useState(null);
 
-	const handleLogin = () => setUser({ id: '1'})
+	const handleLogin = ( logginer
+
+	) => { 
+		console.log(logginer.email, logginer.password);
+
+	}
 
 	const handleLogout = () => setUser(null);
 
