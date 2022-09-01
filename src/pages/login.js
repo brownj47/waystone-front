@@ -1,12 +1,23 @@
-import React, { useEffect} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import CreateUser from './CreateUser';
+// import CreateUser from './CreateUser';
 
 
 
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 
-export default function Login() {
+export default function Login(props) {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.handleLogin(email, password);
+    setEmail('')
+    setPassword('')
+  }
+
   return (
     <>
       {/*
@@ -17,7 +28,7 @@ export default function Login() {
         <body class="h-full">
         ```
       */}
-      
+
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-zinc-800">
         <div className="w-full max-w-md space-y-8">
           <div>
@@ -36,16 +47,16 @@ export default function Login() {
               Sign Up or Login to get started.
             </h4>
             <div>
-            <Link to={{ pathname: `/CreateUser`}}>
-              <button
-                type="submit"
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2">
-                Sign Up
-              </button>
-            </Link>
+              <Link to={{ pathname: `/CreateUser` }}>
+                <button
+                  type="submit"
+                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2">
+                  Sign Up
+                </button>
+              </Link>
             </div>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
@@ -53,6 +64,8 @@ export default function Login() {
                   Email address
                 </label>
                 <input
+                  onChange={e => { setEmail(e.target.value) }}
+                  value={email}
                   id="email-address"
                   name="email"
                   type="email"
@@ -67,6 +80,8 @@ export default function Login() {
                   Password
                 </label>
                 <input
+                  onChange={e => { setPassword(e.target.value) }}
+                  value={password}
                   id="password"
                   name="password"
                   type="password"
@@ -99,7 +114,7 @@ export default function Login() {
             </div>
 
             <div>
-              <Link to={{ pathname: `/home`}}> <button
+              <button
                 type="submit"
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
               >
@@ -107,13 +122,13 @@ export default function Login() {
                   <LockClosedIcon className="h-5 w-5 text-lime-200 group-hover:text-lime-400" aria-hidden="true" />
                 </span>
                 Login
-              </button></Link>
+              </button>
             </div>
           </form>
         </div>
       </div>
 
-      
+
     </>
   )
 }
