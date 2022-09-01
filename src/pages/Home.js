@@ -36,7 +36,7 @@ const stats = [
 	{ label: 'Messages', value: 2 },
 ];
 
-const recentHires = [
+const friends = [
 	{
 		name: 'Leonard Krasner',
 		handle: 'leonardkrasner',
@@ -498,7 +498,7 @@ export function Home() {
 													role="list"
 													className="-my-5 divide-y divide-gray-200"
 												>
-													{recentHires.map((person) => (
+													{friends.map((person) => (
 														<li key={person.handle} className="py-4">
 															<div className="flex items-center space-x-4">
 																<div className="flex-shrink-0">
