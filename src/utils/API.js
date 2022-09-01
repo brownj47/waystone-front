@@ -20,18 +20,19 @@ const API = {
             }
         })
     },
-    signup: (email, password) => {
+    signup: (email, password, username, img_url) => {
         return fetch(`${URL_PREFIX}/users/signup`, {
             method: 'POST',
             body: JSON.stringify({
                 email,
-                password
+                password,
+				username,
+				img_url
                 }),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-
     },
 
 //user routes
