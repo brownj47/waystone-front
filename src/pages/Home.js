@@ -402,7 +402,7 @@ export function Home() {
 									</div>
 								</section>
 
-								<FriendsList friends={friends} />
+								<FriendsList />
 							</div>
 						</div>
 					</div>
