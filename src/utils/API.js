@@ -1,4 +1,4 @@
-const URL_PREFIX = 'http://localhost:3001';
+const URL_PREFIX = 'https://waystoneapi.herokuapp.com/api';
 
 const API = {
     checkToken:token=>{
