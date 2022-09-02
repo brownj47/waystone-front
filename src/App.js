@@ -87,7 +87,8 @@ const navigation = {
 const App = () => {
 	const [user, setUser] = useState({
 		email: '',
-		password: ''
+		password: '',
+		userId: '',
 	});
 	const [token, setToken] = useState('');
 

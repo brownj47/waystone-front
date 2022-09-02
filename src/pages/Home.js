@@ -14,6 +14,7 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import FriendsList from '../components/FriendsList';
 import PostList from '../components/PostList';
+import { Image } from 'cloudinary-react';
 
 const user = {
 	name: 'Chelsea Hagon',
@@ -79,6 +80,7 @@ export function Home() {
 											src="https://i.ibb.co/zmHz8jh/waystone.png"
 											alt="Workflow"
 										/>
+										<Image cloudName="diuo4ygwd" publicId={user.img_url} style={{ width: 250 }} />
 									</div>
 
 									{/* Right section on desktop */}
