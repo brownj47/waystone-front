@@ -53,19 +53,21 @@ function classNames(...classes) {
 }
 
 export function Home(props) {
-	console.log(props)
 // user state and hooks
-	// const [userObj, setUserObj] = useState({})
-	// const [username, setUsername] = useState()
-	// const [password, setPassword] = useState()
-	// const [email, setEmail] = useState()
-	// const [isDeactivated, setIsDeactivated] = useState(false)
+	console.log(props)
+	const [userObj, setUserObj] = useState({})
+	const [UserId, setUserId] = useState(props.user.UserId)
+	const [username, setUsername] = useState()
+	const [password, setPassword] = useState()
+	const [email, setEmail] = useState()
+	const [isDeactivated, setIsDeactivated] = useState(false)
 
-	// useEffect(()=> {
-	// API.getOneUser(UserId).then(res=>res.json()).then(user=>{
-	// 	setUserObj(user)
-	// })
-	// }, [UserId])
+	useEffect(()=> {
+			API.getOneUser(props.user.UserId).then(res=>res.json()).then(user=>{
+			setUserObj(user)
+			console.log(user)
+			})
+		}, [props.user.UserId])
 
 	// useEffect(()=>{
 	// 	API.getOneUser(UserId).then(res=>res.json()).then(user=>{
@@ -371,12 +373,13 @@ export function Home(props) {
 						<h1 className="sr-only">Profile</h1>
 						{/* Main 3 column grid */}
 						<div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
+							<h1>Hello {userObj.username}!</h1>
 							{/* Left column */}
 							<PostList />
 
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4">
-								<FriendsList />
+								{/* <FriendsList friends = {userObj.friends} /> */}
 							</div>
 						</div>
 					</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import UserCard from './UserCard';
 
-function FriendsList() {
+function FriendsList(props) {
 	const friends = [
 		{
 			name: 'Leonard Krasner',
@@ -32,6 +32,7 @@ function FriendsList() {
 			href: '#',
 		},
 	];
+	console.log(props)
 	return (
 		<>
 			{/* FRIENDS */}
@@ -46,8 +47,8 @@ function FriendsList() {
 						</h2>
 						<div className="mt-6 flow-root">
 							<ul role="list" className="-my-5 divide-y divide-gray-200">
-								{friends.map((item) => (
-									<UserCard friend={item} />
+								{props.friends.map((friend) => (
+									<UserCard friend={friend}key = {friend._id} />
 								))}
 							</ul>
 						</div>

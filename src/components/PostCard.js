@@ -1,7 +1,6 @@
 import React from 'react';
 
 function PostCard(post) {
-	console.log(post)
 	return (
 		<div className="py-4">
 			<h1>{post.title}</h1>
