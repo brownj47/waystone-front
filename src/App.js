@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Route, Routes, Link, Navigate, Outlet } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate, Navigate, Outlet } from 'react-router-dom';
 import { Home } from './pages/Home';
 import CreateUser from './pages/CreateUser';
 import Login from './pages/login';
@@ -86,6 +86,8 @@ const navigation = {
 };
 
 const App = () => {
+	const navigate = useNavigate();
+
 	const [user, setUser] = useState({
 		email: '',
 		password: ''
@@ -93,8 +95,7 @@ const App = () => {
 	const [token, setToken] = useState('');
 
 	const handleLogin = async (email, password) => {
-		console.log(email, password)
-		setUser((user)=>{ // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
+		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
 				email,
 				password
@@ -106,12 +107,19 @@ const App = () => {
 				headers: {
 					'Content-Type': 'application/json'
 				}
-			}).then(res => res.json()).then((data) => {
+			}).then(res => {
+				if (!res.ok) {
+					setUser({ username: "", email: "" });
+					setToken("")
+					return;
+				}
+				return res.json()
+			}).then((data) => {
 				console.log(data)
-				if (data.token){
+				if (data.token) {
 					setToken(data.token)
 					localStorage.setItem('token', JSON.stringify(data.token))
-					
+
 				}
 			})
 			return modifiedValue;
@@ -123,12 +131,24 @@ const App = () => {
 			headers: {
 				'Authorization': `Bearer ${tokenToCheck}`
 			}
-		}).then(res => res.json()).then(data => {
-			console.log(data)
-			setToken(tokenToCheck)
-			// console.log(token)
-		}))
-	}
+		}).then(res => {
+			if (!res.ok) {
+				console.log("invalid token!")
+				localStorage.removeItem("token")
+				navigate(`/login`)
+			}
+			else {
+				console.log("valid token")
+				res.json().then(data => {
+					setToken(tokenToCheck)
+					setUser({
+						password: data.password,
+						email: data.email
+					})
+				})
+			}
+		})
+	)}
 	const handleLogout = () => {
 		localStorage.removeItem("token");
 		setToken("")
@@ -136,6 +156,7 @@ const App = () => {
 			email: '',
 			password: ''
 		})
+		navigate("/login");
 	};
 
 	useEffect(() => {
