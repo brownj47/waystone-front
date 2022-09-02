@@ -1,24 +1,39 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
+import cloudinary from 'cloudinary-core';
 import { Image } from 'cloudinary-react'
 
+let logoUrl = '';
 
+export default function CreateUser(props) {
 
-export default function CreateUser() {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        props.handleUserCreate(email, password, username, bio);
+        setBio('')
+        setUsername('')
+        setPassword('')
+        setEmail('')
+    }
+
     const [user, setUser] = useState({
-        userId: 0,
+        userId: '',
         email: '',
-        password: ''
+        password: '',
+        username: '',
+        bio: '',
+        img_url: '',
+        bio: '',
     });
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [bio, setBio] = useState('');
+    const [img_url, setImg_url] = useState('');
+    const [token, setToken] = useState('');
 
     const [imageSelected, setImageSelected] = useState('');
-
-
-
 
     const uploadImage = () => {
 
@@ -28,14 +43,15 @@ export default function CreateUser() {
 
         Axios.post('https://api.cloudinary.com/v1_1/diuo4ygwd/image/upload', formData).then(res => {
             console.log(res)
+            console.log(res.data.secure_url)
+            setImg_url(res.data.secure_url)
+            console.log(img_url)
         })
     };
 
-
-
     return (
         <div className='bg-zinc-800'>
-            <form className="space-y-8 divide-y divide-gray-200 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 " >
+            <form onSubmit={handleSubmit} className="space-y-8 divide-y divide-gray-200 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 " >
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
                         <div>
@@ -56,6 +72,8 @@ export default function CreateUser() {
                                             What's Your Tavern Handle?
                                         </span>
                                         <input
+                                            onChange={e => setUsername(e.target.value)}
+                                            value={username}
                                             type="text"
                                             name="username"
                                             id="username"
@@ -64,19 +82,44 @@ export default function CreateUser() {
                                         />
                                     </div>
                                 </div>
+                            </div>
+                            <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                 <label htmlFor="password" className="block text-sm font-medium text-lime-400 sm:mt-px sm:pt-2">
-                                    Password
+                                    password
                                 </label>
                                 <div className="mt-1 sm:col-span-2 sm:mt-0">
                                     <div className="flex max-w-lg rounded-md shadow-sm">
                                         <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-zinc-800 sm:text-sm">
-                                            What's Your Password?
+                                            Password
                                         </span>
                                         <input
+                                            onChange={e => setPassword(e.target.value)}
+                                            value={password}
                                             type="text"
                                             name="password"
                                             id="password"
                                             autoComplete="password"
+                                            className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-900 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                <label htmlFor="email" className="block text-sm font-medium text-lime-400 sm:mt-px sm:pt-2">
+                                    email
+                                </label>
+                                <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                    <div className="flex max-w-lg rounded-md shadow-sm">
+                                        <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-zinc-800 sm:text-sm">
+                                            Email
+                                        </span>
+                                        <input
+                                            onChange={e => setEmail(e.target.value)}
+                                            value={email}
+                                            type="text"
+                                            name="email"
+                                            id="email"
+                                            autoComplete="email"
                                             className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-900 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                     </div>
@@ -89,18 +132,19 @@ export default function CreateUser() {
                                 </label>
                                 <div className="mt-1 sm:col-span-2 sm:mt-0">
                                     <textarea
+                                        onChange={e => setBio(e.target.value)}
+                                        value={bio}
                                         id="about"
                                         name="about"
                                         rows={3}
                                         className="block w-full max-w-lg rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        defaultValue={''}
                                     />
                                     <p className="mt-2 text-sm text-lime-400">Write a few sentences about yourself.</p>
                                 </div>
                             </div>
 
                             <div className="sm:grid sm:grid-cols-3 sm:items-center sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                <Image cloudName="diuo4ygwd" publicId="https://res.cloudinary.com/diuo4ygwd/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1661998557/julkj2nmzevgxzgjrpyu.jpg" style={{ width: 250 }} />
+                                <Image cloudName="diuo4ygwd" publicId={img_url} style={{ width: 250 }} />
 
                                 <label htmlFor="photo" className="block text-sm font-medium text-lime-400">
                                     Photo
@@ -120,39 +164,34 @@ export default function CreateUser() {
                                             Upload Picutre
                                         </button>
 
-
                                     </div>
                                 </div>
                             </div>
-
-
-
+                            <div className="pt-5">
+                                <div className="flex justify-end">
+                                    <Link to={'/login'}>
+                                        <button
+                                            type="button"
+                                            className="rounded-md border border-gray-300 bg-zinc-500 py-2 px-4 text-sm font-medium text-lime-400 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </Link>
+                                    <button
+                                        type="submit"
+                                        className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    >
+                                        Create Account
+                                    </button>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
                 </div>
-                <div className="pt-5">
-                    <div className="flex justify-end">
-                        <button
-                            type="button"
-                            className="rounded-md border border-gray-300 bg-zinc-500 py-2 px-4 text-sm font-medium text-lime-400 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        >
-                            Cancel
-                        </button>
-                        <Link to={{ pathname: '/Home' }}>
-                            <button
-                                type="submit"
-                                className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                                Create Account
-                            </button>
-                        </Link>
-                    </div>
-                </div>
             </form>
         </div>
-
-    )
+                )
 
 };
 

@@ -33,7 +33,7 @@ export default function Login(props) {
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
-              className="mx-auto h-12 w-auto bg-lime-800 rounded-full"
+              className="mx-auto h-12 w-auto bg-lime-400 rounded-full"
               // src="https://tailwindui.com/img/logos/workflow-mark.svg?color=lime&4hade=600"
 
               src="https://i.ibb.co/zmHz8jh/waystone.png"
@@ -42,19 +42,12 @@ export default function Login(props) {
             <h3 className="mt-6 text-center text-2xl font-bold tracking-tight text-zinc-800 bg-lime-400">
               Welcome to Mordekainen's Waystone
             </h3>
+            <br/>
             <h4 className="mt-2 text-center text-lg font-medium text-lime-500">
               Come find your party!
               Sign Up or Login to get started.
             </h4>
-            <div>
-              <Link to={{ pathname: `/CreateUser` }}>
-                <button
-                  type="submit"
-                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2">
-                  Sign Up
-                </button>
-              </Link>
-            </div>
+            <br/>
           </div>
           <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
@@ -94,21 +87,21 @@ export default function Login(props) {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-lime-300 text-lime-400 focus:ring-lime-200"
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                className="h-4 w-4 rounded border-lime-300 text-lime-400 focus:ring-lime-200"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-lime-300">
-                  Remember me
+                Remember me
                 </label>
-              </div>
+              </div> */}
 
               {/* <div className="text-sm">
                 <a href="#" className="font-medium text-lime-400 hover:text-lime-200">
-                  Forgot your password?
+                Forgot your password?
                 </a>
               </div> */}
             </div>
@@ -124,6 +117,15 @@ export default function Login(props) {
                 Login
               </button>
             </div>
+              <div>
+                <Link to={{ pathname: `/CreateUser` }}>
+                  <button
+                    type="submit"
+                    className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2">
+                    Sign Up
+                  </button>
+                </Link>
+              </div>
           </form>
         </div>
       </div>

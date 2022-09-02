@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Route, Routes, Link, Navigate, Outlet } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate, Navigate, Outlet } from 'react-router-dom';
 import { Home } from './pages/Home';
 import CreateUser from './pages/CreateUser';
 import Login from './pages/login';
 import API from './utils/API';
 
+const URL_PREFIX = 'http://localhost:3001/'
 
 
 
@@ -84,46 +85,112 @@ const navigation = {
 	],
 };
 
+const ProtectedRoute = ({ user}) => {
+
+	return user? <Outlet/>: <Navigate to={'/login'} />
+
+}
 const App = () => {
+	const navigate = useNavigate();
+
 	const [user, setUser] = useState({
 		email: '',
-		password: ''
+		password: '',
+		userId: '',
 	});
 	const [token, setToken] = useState('');
 
 	const handleLogin = async (email, password) => {
-		console.log(email, password)
-		setUser({
-			email,
-			password
-		})
-		console.log(user)
-		fetch('http://localhost:3001/login', {
-			method: 'POST',
-			body: JSON.stringify(user),
-			headers: {
-				'Content-Type': 'application/json'
+		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
+			const modifiedValue = {
+				email,
+				password
 			}
-		}).then(res => res.json()).then((data) => {
-			console.log(data)
-			if (data.token){
+			console.log(modifiedValue);
+			fetch(`${URL_PREFIX}login`, {
+				method: 'POST',
+				body: JSON.stringify(modifiedValue),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(res => {
+				if (!res.ok) {
+					setUser({ username: "", email: "" });
+					setToken("")
+					return;
+				}
+				return res.json()
+			}).then((data) => {
+				console.log(data)
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
-				
+				navigate('/home')
+			})
+			return modifiedValue;
+		})
+	}
+
+	const handleUserCreate = async (email, password, username, bio)=>{
+		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
+			const modifiedValue = {
+				email,
+				password,
+				username, 
+				bio
 			}
+			console.log(modifiedValue);
+			fetch(`${URL_PREFIX}api/users`, {
+				method: 'POST',
+				body: JSON.stringify(modifiedValue),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(res => {
+				if (!res.ok) {
+					setUser({ username: "", email: "" });
+					setToken("")
+					return;
+				}
+				return res.json()
+			}).then((data) => {
+				console.log(data)
+				setToken(data.token)
+				localStorage.setItem('token', JSON.stringify(data.token))
+				navigate('/home')
+			})
+			return modifiedValue;
 		})
 	}
 
 	const checkToken = (tokenToCheck) => {
-		return (fetch('http://localhost:3001/checkToken', {
+		return (fetch(`${URL_PREFIX}checkToken`, {
 			headers: {
 				'Authorization': `Bearer ${tokenToCheck}`
 			}
-		}).then(res => res.json()).then(data => {
-			console.log(data)
-			setToken(tokenToCheck)
-			// console.log(token)
-		}))
+		}).then(res => {
+			if (!res.ok) {
+				console.log("invalid token!")
+				localStorage.removeItem("token")
+				setToken('')
+				setUser({
+					password: '',
+					email: ''
+				})
+				navigate(`/login`)
+			}
+			else {
+				console.log("valid token")
+				res.json().then(data => {
+					setToken(tokenToCheck)
+					setUser({
+						password: data.password,
+						email: data.email
+					})
+					navigate('/home')
+				})
+			}
+		})
+		)
 	}
 	const handleLogout = () => {
 		localStorage.removeItem("token");
@@ -132,10 +199,12 @@ const App = () => {
 			email: '',
 			password: ''
 		})
+		navigate("/login");
 	};
 
 	useEffect(() => {
 		const storedToken = JSON.parse(localStorage.getItem('token'));
+		console.log(storedToken)
 		checkToken(storedToken)
 	}, [])
 
@@ -143,16 +212,20 @@ const App = () => {
 	return (
 		<>
 
-			<Navbar />
-			<button onClick={() => { checkToken(token) }}>CheckToken</button>
-			<button onClick={handleLogout}>Login</button>
 			<Routes>
 				<Route index element={<Login />} />
-				<Route path="/home" element={<ProtectedRoute user={user}><Home /></ProtectedRoute>} />
-				<Route path="/CreateUser" element={<CreateUser />} />
+				{/* <ProtectedRouteTest user={user}>
+					<Home/>
+				</ProtectedRouteTest> */}
+				<Route element={<ProtectedRoute user={user} />} >
+					<Route path="/home" element={<Home />} />
+				</Route>
+				<Route path="/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
 				<Route path='*' element={<h1>404 Page Not Found</h1>} />
 			</Routes>
+
+			
 
 			<footer className="bg-zinc-800">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
@@ -189,27 +262,12 @@ const App = () => {
 				</div>
 
 			</footer>
-
+			<button onClick={() => { checkToken(token) }}>CheckToken</button>
+			<br />
+			<button onClick={handleLogout}>LogOUt</button>
 		</>
 	);
 }
 
-const ProtectedRoute = ({ user, redirectPath = '/login', children, }) => {
-	if (!user) {
-		return <Navigate to={redirectPath} />
-	}
-	return children ? children : <Outlet />;
-
-}
-
-const Navbar = () => (
-	<nav>
-		<Link to="/login"><button>Login</button></Link>
-		<Link to="/home"><button>Home</button></Link>
-		<Link to="/CreateUser"><button>User</button></Link>
-		<Link to="/api">APIs</Link>
-
-	</nav>
-);
 
 export default App;
