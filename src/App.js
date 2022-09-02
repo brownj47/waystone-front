@@ -188,18 +188,25 @@ const App = () => {
 				localStorage.removeItem("token")
 				setToken('')
 				setUser({
-					password: '',
-					email: ''
+					email: '',
+					userId: '',
+					username:'',
+					img_url:''
 				})
 				navigate(`/login`)
 			}
 			else {
 				console.log("valid token")
-				res.json().then(data => {
+				res.json().then((data) => {
 					setToken(tokenToCheck)
+					return data
+				}).then(user => {
+					console.log('=========================================')
+					console.log(user)
 					setUser({
-						password: data.password,
-						email: data.email
+						email: user.email,
+						userId: user.id,
+						...user
 					})
 					navigate('/home')
 				})
