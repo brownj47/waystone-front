@@ -7,7 +7,7 @@ import CreateUser from './pages/CreateUser';
 import Login from './pages/login';
 import API from './utils/API';
 
-const URL_PREFIX = 'http://localhost:3001/'
+const URL_PREFIX = 'https://waystoneapi.herokuapp.com/'
 
 
 
@@ -218,7 +218,7 @@ const App = () => {
 					<Home/>
 				</ProtectedRouteTest> */}
 				<Route element={<ProtectedRoute user={user} />} >
-					<Route path="/home" element={<Home />} />
+					<Route path="/home" element={<Home user={user} />} />
 				</Route>
 				<Route path="/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
