@@ -7,6 +7,7 @@ import CreateUser from './pages/CreateUser';
 import Login from './pages/login';
 import API from './utils/API';
 
+const URL_PREFIX = 'http://localhost:3001/'
 
 
 
@@ -93,29 +94,32 @@ const App = () => {
 
 	const handleLogin = async (email, password) => {
 		console.log(email, password)
-		setUser({
-			email,
-			password
-		})
-		console.log(user)
-		fetch('http://localhost:3001/login', {
-			method: 'POST',
-			body: JSON.stringify(user),
-			headers: {
-				'Content-Type': 'application/json'
+		setUser((user)=>{ // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
+			const modifiedValue = {
+				email,
+				password
 			}
-		}).then(res => res.json()).then((data) => {
-			console.log(data)
-			if (data.token){
-				setToken(data.token)
-				localStorage.setItem('token', JSON.stringify(data.token))
-				
-			}
+			console.log(modifiedValue);
+			fetch(`${URL_PREFIX}login`, {
+				method: 'POST',
+				body: JSON.stringify(modifiedValue),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(res => res.json()).then((data) => {
+				console.log(data)
+				if (data.token){
+					setToken(data.token)
+					localStorage.setItem('token', JSON.stringify(data.token))
+					
+				}
+			})
+			return modifiedValue;
 		})
 	}
 
 	const checkToken = (tokenToCheck) => {
-		return (fetch('http://localhost:3001/checkToken', {
+		return (fetch(`${URL_PREFIX}checkToken`, {
 			headers: {
 				'Authorization': `Bearer ${tokenToCheck}`
 			}
@@ -136,6 +140,7 @@ const App = () => {
 
 	useEffect(() => {
 		const storedToken = JSON.parse(localStorage.getItem('token'));
+		console.log(storedToken)
 		checkToken(storedToken)
 	}, [])
 
