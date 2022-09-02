@@ -14,11 +14,13 @@ export default function CreateUser(props) {
         props.handleUserCreate(email, password, username, bio);
         setBio('')
         setUsername('')
+        setPassword('')
+        setEmail('')
     }
 
     return (
         <div className='bg-zinc-800'>
-            <form className="space-y-8 divide-y divide-gray-200 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 " >
+            <form onSubmit={handleSubmit} className="space-y-8 divide-y divide-gray-200 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 " >
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
                         <div>

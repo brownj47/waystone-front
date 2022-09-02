@@ -133,10 +133,12 @@ const App = () => {
 		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
 				email,
-				password
+				password,
+				username, 
+				bio
 			}
 			console.log(modifiedValue);
-			fetch(`${URL_PREFIX}login`, {
+			fetch(`${URL_PREFIX}api/users`, {
 				method: 'POST',
 				body: JSON.stringify(modifiedValue),
 				headers: {
