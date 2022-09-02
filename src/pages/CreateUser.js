@@ -1,11 +1,8 @@
-import React, { useState }, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import cloudinary from 'cloudinary-core';
 import { Image } from 'cloudinary-react'
-
-let logoUrl = '';
-
 
 let logoUrl = '';
 
@@ -168,30 +165,34 @@ export default function CreateUser(props) {
                                             Upload Picutre
                                         </button>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="pt-5">
+                                <div className="flex justify-end">
+                                    <Link to={'/login'}>
+                                        <button
+                                            type="button"
+                                            className="rounded-md border border-gray-300 bg-zinc-500 py-2 px-4 text-sm font-medium text-lime-400 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </Link>
+                                    <button
+                                        type="submit"
+                                        className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    >
+                                        Create Account
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                </div>
-                <div className="pt-5">
-                    <div className="flex justify-end">
-                        <Link to={'/login'}>
-                            <button
-                                type="button"
-                                className="rounded-md border border-gray-300 bg-zinc-500 py-2 px-4 text-sm font-medium text-lime-400 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                                Cancel
-                            </button>
-                        </Link>
-                        <button
-                            type="submit"
-                            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        >
-                            Create Account
-                        </button>
                     </div>
                 </div>
             </form>
         </div>
-    )
+                )
 
 };
 
