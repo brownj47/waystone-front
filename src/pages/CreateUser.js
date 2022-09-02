@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState }, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
+import cloudinary from 'cloudinary-core';
+import { Image } from 'cloudinary-react'
 
+let logoUrl = '';
+
+
+let logoUrl = '';
 
 export default function CreateUser(props) {
-
-    const [bio, setBio] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,6 +19,38 @@ export default function CreateUser(props) {
         setPassword('')
         setEmail('')
     }
+
+    const [user, setUser] = useState({
+        userId: '',
+        email: '',
+        password: '',
+        username: '',
+        bio: '',
+        img_url: '',
+        bio: '',
+    });
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [bio, setBio] = useState('');
+    const [img_url, setImg_url] = useState('');
+    const [token, setToken] = useState('');
+
+    const [imageSelected, setImageSelected] = useState('');
+
+    const uploadImage = () => {
+
+        const formData = new FormData()
+        formData.append('file', imageSelected)
+        formData.append('upload_preset', 'waystone')
+
+        Axios.post('https://api.cloudinary.com/v1_1/diuo4ygwd/image/upload', formData).then(res => {
+            console.log(res)
+            console.log(res.data.secure_url)
+            setImg_url(res.data.secure_url)
+            console.log(img_url)
+        })
+    };
 
     return (
         <div className='bg-zinc-800'>
@@ -114,6 +148,8 @@ export default function CreateUser(props) {
                             </div>
 
                             <div className="sm:grid sm:grid-cols-3 sm:items-center sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                <Image cloudName="diuo4ygwd" publicId={img_url} style={{ width: 250 }} />
+
                                 <label htmlFor="photo" className="block text-sm font-medium text-lime-400">
                                     Photo
                                 </label>
@@ -124,15 +160,13 @@ export default function CreateUser(props) {
                                                 <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                             </svg>
                                         </span>
+                                        <input type="file" name="photo" id="photo" className="" onChange={(e) => { setImageSelected(e.target.files[0]) }} />
                                         <button
                                             type="button"
-                                            className="ml-5 rounded-md border border-gray-300 bg-lime-400 py-2 px-3 text-sm font-medium leading-4 text-zinc-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        >
-                                            Change
+                                            onClick={() => uploadImage()}
+                                            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                            Upload Picutre
                                         </button>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>

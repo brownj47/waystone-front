@@ -33,7 +33,7 @@ export default function Login(props) {
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
-              className="mx-auto h-12 w-auto bg-lime-800 rounded-full"
+              className="mx-auto h-12 w-auto bg-lime-400 rounded-full"
               // src="https://tailwindui.com/img/logos/workflow-mark.svg?color=lime&4hade=600"
 
               src="https://i.ibb.co/zmHz8jh/waystone.png"
