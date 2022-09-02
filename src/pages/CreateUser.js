@@ -138,7 +138,6 @@ export default function CreateUser(props) {
                                         name="about"
                                         rows={3}
                                         className="block w-full max-w-lg rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        defaultValue={''}
                                     />
                                     <p className="mt-2 text-sm text-lime-400">Write a few sentences about yourself.</p>
                                 </div>
