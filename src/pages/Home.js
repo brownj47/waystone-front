@@ -66,11 +66,11 @@ export function Home() {
 	// })
 	// }, [UserId])
 
-	useEffect(()=>{
-		API.getOneUser(UserId).then(res=>res.json()).then(user=>{
-		setUserObj(user)
-		})
-	}, [])
+	// useEffect(()=>{
+	// 	API.getOneUser(UserId).then(res=>res.json()).then(user=>{
+	// 	setUserObj(user)
+	// 	})
+	// }, [])
 
 	// const updateUser=e=>{
     //     e.preventDefault();
