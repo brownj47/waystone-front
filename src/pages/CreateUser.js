@@ -1,23 +1,53 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
+import cloudinary from 'cloudinary-core';
 import { Image } from 'cloudinary-react'
+
+let logoUrl = '';
 
 
 
 export default function CreateUser() {
     const [user, setUser] = useState({
-        userId: 0,
+        userId: '',
         email: '',
-        password: ''
+        password: '',
+        username: '',
+        bio: '',
+        img_url: '',
+        bio: '',
     });
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [bio, setBio] = useState('');
+    const [img_url, setImg_url] = useState('');
+    const [token, setToken] = useState('');
 
     const [imageSelected, setImageSelected] = useState('');
 
-
+   
+    
+    const assignProfile = async () => {
+		console.log(email, password, username, bio, img_url, bio,)
+		setUser({email, password, username, bio, img_url, bio})
+		console.log(user)
+		fetch('http://localhost:3001/CreateUser', {
+			method: 'POST',
+			body: JSON.stringify(user),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(res => res.json()).then((data) => {
+			console.log(data)
+			if (data.token){
+				setToken(data.token)
+				localStorage.setItem('token', JSON.stringify(data.token))
+				
+			}
+		})
+	}
 
 
     const uploadImage = () => {
@@ -28,9 +58,29 @@ export default function CreateUser() {
 
         Axios.post('https://api.cloudinary.com/v1_1/diuo4ygwd/image/upload', formData).then(res => {
             console.log(res)
+            console.log(res.data.secure_url)
+            setImg_url(res.data.secure_url)
+            console.log(img_url)
         })
     };
 
+
+
+    // const myWidget = cloudinary.createUploadWidget({
+    //     cloudName: 'diuo4ygwd', 
+    //     uploadPreset: 'waystone'}, (error, result) => { 
+    //       if (!error && result && result.event === "success") { 
+    //         // console.log('Done! Here is the image info: ', result.info); 
+    //         console.log(result.info.url)
+    //         logoUrl = result.info.url
+    //       }
+    //     }
+    //   )
+
+    // document.getElementById("upload_widget").addEventListener("click", e=>{
+    //     e.preventDefault();
+    //       myWidget.open();
+    //     }, false);
 
 
     return (
@@ -56,10 +106,29 @@ export default function CreateUser() {
                                             What's Your Tavern Handle?
                                         </span>
                                         <input
+                                            onChange={e => { setUsername(e.target.value) }}
                                             type="text"
                                             name="username"
                                             id="username"
                                             autoComplete="username"
+                                            className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-900 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                </div>
+                                <label htmlFor="email" className="block text-sm font-medium text-lime-400 sm:mt-px sm:pt-2">
+                                    email
+                                </label>
+                                <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                    <div className="flex max-w-lg rounded-md shadow-sm">
+                                        <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-zinc-800 sm:text-sm">
+                                            What's Your email?
+                                        </span>
+                                        <input
+                                            onChange={e => { setEmail(e.target.value) }}
+                                            type="text"
+                                            name="email"
+                                            id="email"
+                                            autoComplete="email"
                                             className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-900 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                     </div>
@@ -73,6 +142,7 @@ export default function CreateUser() {
                                             What's Your Password?
                                         </span>
                                         <input
+                                            onChange={e => { setPassword(e.target.value) }}
                                             type="text"
                                             name="password"
                                             id="password"
@@ -89,6 +159,7 @@ export default function CreateUser() {
                                 </label>
                                 <div className="mt-1 sm:col-span-2 sm:mt-0">
                                     <textarea
+                                        onChange={e => { setBio(e.target.value) }}
                                         id="about"
                                         name="about"
                                         rows={3}
@@ -100,7 +171,7 @@ export default function CreateUser() {
                             </div>
 
                             <div className="sm:grid sm:grid-cols-3 sm:items-center sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                <Image cloudName="diuo4ygwd" publicId="https://res.cloudinary.com/diuo4ygwd/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1661998557/julkj2nmzevgxzgjrpyu.jpg" style={{ width: 250 }} />
+                                <Image cloudName="diuo4ygwd" publicId={img_url} style={{ width: 250 }} />
 
                                 <label htmlFor="photo" className="block text-sm font-medium text-lime-400">
                                     Photo
@@ -139,14 +210,15 @@ export default function CreateUser() {
                         >
                             Cancel
                         </button>
-                        <Link to={{ pathname: '/Home' }}>
+                        
                             <button
-                                type="submit"
+                                type="button"
+                                onClick={() => assignProfile()}
                                 className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                                 Create Account
                             </button>
-                        </Link>
+                        
                     </div>
                 </div>
             </form>
