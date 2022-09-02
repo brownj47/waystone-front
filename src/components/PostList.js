@@ -14,7 +14,6 @@ function PostList() {
 	const [allPosts, setAllPosts] = useState([])
 	useEffect(()=>{
 		API.getAllPosts().then(res=>res.json()).then(posts=>{
-			console.log(posts)
 			setAllPosts(posts)
 		})
 	}, [])
