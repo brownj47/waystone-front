@@ -44,15 +44,7 @@ const API = {
 	
 	//returns one user object
 	getOneUser:(UserId)=>{
-		return fetch(`${URL_PREFIX}/users/user`, {
-			method: 'GET',
-            body: JSON.stringify({
-                UserId
-                }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-		})
+		return fetch(`${URL_PREFIX}/users/user/${UserId}`)
 	},
 
 	//returns random user object

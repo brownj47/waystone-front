@@ -96,7 +96,7 @@ const App = () => {
 
 	const [user, setUser] = useState({
 		email: '',
-		userId: '',
+		UserId: '',
 		username:'',
 		img_url:''
 	});
@@ -122,7 +122,7 @@ const App = () => {
 				if (!res.ok) {
 					setUser({ 
 						email: '',
-						userId: '',
+						UserId: '',
 						username:'',
 						img_url:'' });
 					setToken("")
@@ -189,7 +189,7 @@ const App = () => {
 				setToken('')
 				setUser({
 					email: '',
-					userId: '',
+					UserId: '',
 					username:'',
 					img_url:''
 				})
@@ -205,8 +205,8 @@ const App = () => {
 					console.log(user)
 					setUser({
 						email: user.email,
-						userId: user.id,
-						...user
+						UserId: user.id,
+						// ...user
 					})
 					navigate('/home')
 				})
@@ -228,6 +228,7 @@ const App = () => {
 		const storedToken = JSON.parse(localStorage.getItem('token'));
 		console.log(storedToken)
 		checkToken(storedToken)
+		
 	}, [])
 
 
