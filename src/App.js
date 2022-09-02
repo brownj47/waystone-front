@@ -85,6 +85,11 @@ const navigation = {
 	],
 };
 
+const ProtectedRoute = ({ user}) => {
+
+	return user? <Outlet/>: <Navigate to={'/login'} />
+
+}
 const App = () => {
 	const navigate = useNavigate();
 
@@ -116,11 +121,9 @@ const App = () => {
 				return res.json()
 			}).then((data) => {
 				console.log(data)
-				if (data.token) {
-					setToken(data.token)
-					localStorage.setItem('token', JSON.stringify(data.token))
-
-				}
+				setToken(data.token)
+				localStorage.setItem('token', JSON.stringify(data.token))
+				navigate('/home')
 			})
 			return modifiedValue;
 		})
@@ -135,6 +138,11 @@ const App = () => {
 			if (!res.ok) {
 				console.log("invalid token!")
 				localStorage.removeItem("token")
+				setToken('')
+				setUser({
+					password: '',
+					email: ''
+				})
 				navigate(`/login`)
 			}
 			else {
@@ -145,10 +153,12 @@ const App = () => {
 						password: data.password,
 						email: data.email
 					})
+					navigate('/home')
 				})
 			}
 		})
-	)}
+		)
+	}
 	const handleLogout = () => {
 		localStorage.removeItem("token");
 		setToken("")
@@ -169,16 +179,22 @@ const App = () => {
 	return (
 		<>
 
-			<Navbar />
-			<button onClick={() => { checkToken(token) }}>CheckToken</button>
-			<button onClick={handleLogout}>Login</button>
 			<Routes>
 				<Route index element={<Login />} />
-				<Route path="/home" element={<ProtectedRoute user={user}><Home /></ProtectedRoute>} />
+				{/* <ProtectedRouteTest user={user}>
+					<Home/>
+				</ProtectedRouteTest> */}
+				<Route element={<ProtectedRoute user={user} />} >
+					<Route path="/home" element={<Home />} />
+				</Route>
 				<Route path="/CreateUser" element={<CreateUser />} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
 				<Route path='*' element={<h1>404 Page Not Found</h1>} />
 			</Routes>
+
+			<button onClick={() => { checkToken(token) }}>CheckToken</button>
+			<br />
+			<button onClick={handleLogout}>LogOUt</button>
 
 			<footer className="bg-zinc-800">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
@@ -220,22 +236,5 @@ const App = () => {
 	);
 }
 
-const ProtectedRoute = ({ user, redirectPath = '/login', children, }) => {
-	if (!user) {
-		return <Navigate to={redirectPath} />
-	}
-	return children ? children : <Outlet />;
-
-}
-
-const Navbar = () => (
-	<nav>
-		<Link to="/login"><button>Login</button></Link>
-		<Link to="/home"><button>Home</button></Link>
-		<Link to="/CreateUser"><button>User</button></Link>
-		<Link to="/api">APIs</Link>
-
-	</nav>
-);
 
 export default App;
