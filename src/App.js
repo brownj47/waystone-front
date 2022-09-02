@@ -129,6 +129,36 @@ const App = () => {
 		})
 	}
 
+	const handleUserCreate = async (email, password, username, bio)=>{
+		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
+			const modifiedValue = {
+				email,
+				password
+			}
+			console.log(modifiedValue);
+			fetch(`${URL_PREFIX}login`, {
+				method: 'POST',
+				body: JSON.stringify(modifiedValue),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(res => {
+				if (!res.ok) {
+					setUser({ username: "", email: "" });
+					setToken("")
+					return;
+				}
+				return res.json()
+			}).then((data) => {
+				console.log(data)
+				setToken(data.token)
+				localStorage.setItem('token', JSON.stringify(data.token))
+				navigate('/home')
+			})
+			return modifiedValue;
+		})
+	}
+
 	const checkToken = (tokenToCheck) => {
 		return (fetch(`${URL_PREFIX}checkToken`, {
 			headers: {
@@ -187,14 +217,12 @@ const App = () => {
 				<Route element={<ProtectedRoute user={user} />} >
 					<Route path="/home" element={<Home />} />
 				</Route>
-				<Route path="/CreateUser" element={<CreateUser />} />
+				<Route path="/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
 				<Route path='*' element={<h1>404 Page Not Found</h1>} />
 			</Routes>
 
-			<button onClick={() => { checkToken(token) }}>CheckToken</button>
-			<br />
-			<button onClick={handleLogout}>LogOUt</button>
+			
 
 			<footer className="bg-zinc-800">
 				<div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
@@ -231,7 +259,9 @@ const App = () => {
 				</div>
 
 			</footer>
-
+			<button onClick={() => { checkToken(token) }}>CheckToken</button>
+			<br />
+			<button onClick={handleLogout}>LogOUt</button>
 		</>
 	);
 }
