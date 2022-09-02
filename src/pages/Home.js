@@ -52,7 +52,8 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
-export function Home() {
+export function Home(props) {
+	console.log(props)
 // user state and hooks
 	// const [userObj, setUserObj] = useState({})
 	// const [username, setUsername] = useState()
