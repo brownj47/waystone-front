@@ -203,12 +203,13 @@ const API = {
 	},
 	
 	// creates a new post
-	createNewPost:(title, post_body, UserId, GroupId)=>{
+	createNewPost:(title, post_body, username, UserId, GroupId)=>{
 		return fetch(`${URL_PREFIX}/posts`, {
 			method: 'POST',
             body: JSON.stringify({
-                title, 
+                title,
 				post_body, 
+				username,
 				UserId,
 				GroupId
                 }),
