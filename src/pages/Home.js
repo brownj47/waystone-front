@@ -1,5 +1,6 @@
-import { Fragment } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Menu, Popover, Transition } from '@headlessui/react';
+import API from '../utils/API';
 import {
 	AcademicCapIcon,
 	BanknotesIcon,
@@ -51,6 +52,62 @@ function classNames(...classes) {
 }
 
 export function Home() {
+// user state and hooks
+	// const [userObj, setUserObj] = useState({})
+	// const [username, setUsername] = useState()
+	// const [password, setPassword] = useState()
+	// const [email, setEmail] = useState()
+	// const [isDeactivated, setIsDeactivated] = useState(false)
+
+	// useEffect(()=> {
+	// API.getOneUser(UserId).then(res=>res.json()).then(user=>{
+	// 	setUserObj(user)
+	// })
+	// }, [UserId])
+
+	useEffect(()=>{
+		API.getOneUser(UserId).then(res=>res.json()).then(user=>{
+		setUserObj(user)
+		})
+	}, [])
+
+	// const updateUser=e=>{
+    //     e.preventDefault();
+    //     API.updateUser(UserId, username, email, password).then(res=>res.json()).then(user=>{
+    //         console.log(user);
+    //     })
+    // }
+
+	// const requestFriend=e=>{
+    //     e.preventDefault();
+    //     API.requestFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
+    //         console.log(user);
+    //     })
+    // }
+
+	// const acceptFriend=e=>{
+    //     e.preventDefault();
+    //     API.acceptFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
+    //         console.log(user);
+    //     })
+    // }
+
+	// const denyFriend=e=>{
+    //     e.preventDefault();
+    //     API.denyFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
+    //         console.log(user);
+    //     })
+    // }
+
+	// const deactivateUser=e=>{
+    //     e.preventDefault();
+	// 	setIsDeactivated(true)
+    //     API.deactivateUser(UserId, isDeactivated).then(res=>res.json()).then(user=>{
+    //         console.log(user);
+    //     })
+    // }
+
+
 	return (
 		<>
 			{/*
