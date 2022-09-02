@@ -52,7 +52,8 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
-export function Home() {
+export function Home(props) {
+	console.log(props)
 // user state and hooks
 	// const [userObj, setUserObj] = useState({})
 	// const [username, setUsername] = useState()
@@ -66,11 +67,11 @@ export function Home() {
 	// })
 	// }, [UserId])
 
-	useEffect(()=>{
-		API.getOneUser(UserId).then(res=>res.json()).then(user=>{
-		setUserObj(user)
-		})
-	}, [])
+	// useEffect(()=>{
+	// 	API.getOneUser(UserId).then(res=>res.json()).then(user=>{
+	// 	setUserObj(user)
+	// 	})
+	// }, [])
 
 	// const updateUser=e=>{
     //     e.preventDefault();
