@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import CreateUser from './pages/CreateUser';
 import Login from './pages/login';
 import API from './utils/API';
+import { data } from 'autoprefixer';
 
 const URL_PREFIX = 'https://waystoneapi.herokuapp.com/'
 
@@ -95,8 +96,9 @@ const App = () => {
 
 	const [user, setUser] = useState({
 		email: '',
-		password: '',
 		userId: '',
+		username:'',
+		img_url:''
 	});
 	const [token, setToken] = useState('');
 
@@ -104,8 +106,11 @@ const App = () => {
 		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
 				email,
-				password
+				password,
 			}
+
+			const foundUser = {}
+
 			console.log(modifiedValue);
 			fetch(`${URL_PREFIX}login`, {
 				method: 'POST',
@@ -115,18 +120,28 @@ const App = () => {
 				}
 			}).then(res => {
 				if (!res.ok) {
-					setUser({ username: "", email: "" });
+					setUser({ 
+						email: '',
+						userId: '',
+						username:'',
+						img_url:'' });
 					setToken("")
 					return;
 				}
 				return res.json()
 			}).then((data) => {
+				console.log('==============================================')
 				console.log(data)
+				foundUser.email = data.user.email
+				foundUser.username = data.user.username
+				foundUser.img_url = data.user.img_url
+				foundUser.UserId = data.user._id
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
 				navigate('/home')
+				
 			})
-			return modifiedValue;
+			return foundUser;
 		})
 	}
 
@@ -173,18 +188,25 @@ const App = () => {
 				localStorage.removeItem("token")
 				setToken('')
 				setUser({
-					password: '',
-					email: ''
+					email: '',
+					userId: '',
+					username:'',
+					img_url:''
 				})
 				navigate(`/login`)
 			}
 			else {
 				console.log("valid token")
-				res.json().then(data => {
+				res.json().then((data) => {
 					setToken(tokenToCheck)
+					return data
+				}).then(user => {
+					console.log('=========================================')
+					console.log(user)
 					setUser({
-						password: data.password,
-						email: data.email
+						email: user.email,
+						userId: user.id,
+						...user
 					})
 					navigate('/home')
 				})
