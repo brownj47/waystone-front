@@ -48,8 +48,8 @@ const CreateGroup = (props) => {
 					}}
 					className="block w-full border-0 pt-2.5 text-xl font-medium placeholder-gray-500 px-2 rounded "
 				/>
-				<div className="flex"></div>
-				<div className="flex-shrink-0 ">
+
+				<div className="flex-shrink-0 justify-items-end ">
 					<button
 						type="submit"
 						className="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -62,14 +62,15 @@ const CreateGroup = (props) => {
 				{props.user.friends.map(function (friend) {
 					return (
 						<>
-							<div className="m-2 justify-items-end">
-								<button
-									type="submit"
-									className="inline-flex items-center rounded-md border border-transparent bg-lime-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-								>
-									Create
-								</button>
-							</div>
+							<button
+								key={friend}
+								onClick={(e) => {
+									setMembersToAdd([...membersToAdd, friend]);
+									e.target.showComponent = false;
+								}}
+							>
+								{friend}
+							</button>
 
 							<br />
 						</>
