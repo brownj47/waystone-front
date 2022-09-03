@@ -17,6 +17,7 @@ import FriendsList from '../components/FriendsList';
 import CreateGroup from '../components/CreateGroup';
 import PostList from '../components/PostList';
 import { Image } from 'cloudinary-react';
+import CreatePost from '../components/CreatePost';
 
 const user = {
 	name: 'Chelsea Hagon',
@@ -54,21 +55,23 @@ function classNames(...classes) {
 }
 
 export function Home(props) {
-// user state and hooks
-	console.log(props)
-	const [userObj, setUserObj] = useState({})
-	const [UserId, setUserId] = useState(props.user.UserId)
-	const [username, setUsername] = useState()
-	const [password, setPassword] = useState()
-	const [email, setEmail] = useState()
-	const [isDeactivated, setIsDeactivated] = useState(false)
+	// user state and hooks
+	console.log(props);
+	const [userObj, setUserObj] = useState({});
+	const [UserId, setUserId] = useState(props.user.UserId);
+	const [username, setUsername] = useState();
+	const [password, setPassword] = useState();
+	const [email, setEmail] = useState();
+	const [isDeactivated, setIsDeactivated] = useState(false);
 
-	useEffect(()=> {
-			API.getOneUser(props.user.UserId).then(res=>res.json()).then(user=>{
-			setUserObj(user)
-			console.log(user)
-			})
-		}, [props.user.UserId])
+	useEffect(() => {
+		API.getOneUser(props.user.UserId)
+			.then((res) => res.json())
+			.then((user) => {
+				setUserObj(user);
+				console.log(user);
+			});
+	}, [props.user.UserId]);
 
 	// useEffect(()=>{
 	// 	API.getOneUser(UserId).then(res=>res.json()).then(user=>{
@@ -77,41 +80,40 @@ export function Home(props) {
 	// }, [])
 
 	// const updateUser=e=>{
-    //     e.preventDefault();
-    //     API.updateUser(UserId, username, email, password).then(res=>res.json()).then(user=>{
-    //         console.log(user);
-    //     })
-    // }
+	//     e.preventDefault();
+	//     API.updateUser(UserId, username, email, password).then(res=>res.json()).then(user=>{
+	//         console.log(user);
+	//     })
+	// }
 
 	// const requestFriend=e=>{
-    //     e.preventDefault();
-    //     API.requestFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
-    //         console.log(user);
-    //     })
-    // }
+	//     e.preventDefault();
+	//     API.requestFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
+	//         console.log(user);
+	//     })
+	// }
 
 	// const acceptFriend=e=>{
-    //     e.preventDefault();
-    //     API.acceptFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
-    //         console.log(user);
-    //     })
-    // }
+	//     e.preventDefault();
+	//     API.acceptFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
+	//         console.log(user);
+	//     })
+	// }
 
 	// const denyFriend=e=>{
-    //     e.preventDefault();
-    //     API.denyFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
-    //         console.log(user);
-    //     })
-    // }
+	//     e.preventDefault();
+	//     API.denyFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
+	//         console.log(user);
+	//     })
+	// }
 
 	// const deactivateUser=e=>{
-    //     e.preventDefault();
+	//     e.preventDefault();
 	// 	setIsDeactivated(true)
-    //     API.deactivateUser(UserId, isDeactivated).then(res=>res.json()).then(user=>{
-    //         console.log(user);
-    //     })
-    // }
-
+	//     API.deactivateUser(UserId, isDeactivated).then(res=>res.json()).then(user=>{
+	//         console.log(user);
+	//     })
+	// }
 
 	return (
 		<>
@@ -141,8 +143,13 @@ export function Home(props) {
 											src="https://i.ibb.co/zmHz8jh/waystone.png"
 											alt="Workflow"
 										/>
-										<Image cloudName="diuo4ygwd" publicId={user.img_url} style={{ width: 250 }} />
+										<Image
+											cloudName="diuo4ygwd"
+											publicId={user.img_url}
+											style={{ width: 250 }}
+										/>
 									</div>
+									<h1>Hello {userObj.username}!</h1>
 
 									{/* Right section on desktop */}
 									<div className="hidden lg:ml-4 lg:flex lg:items-center lg:py-5 lg:pr-0.5">
@@ -373,8 +380,7 @@ export function Home(props) {
 					<div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 						<h1 className="sr-only">Profile</h1>
 						{/* Main 3 column grid */}
-						<div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
-							<h1>Hello {userObj.username}!</h1>
+						<div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 overflow-auto ">
 							{/* Left column */}
 							<PostList />
 
