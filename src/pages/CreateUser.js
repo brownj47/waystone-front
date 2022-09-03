@@ -6,26 +6,9 @@ import { Image } from 'cloudinary-react'
 
 let logoUrl = '';
 
+const URL_PREFIX = 'https://waystoneapi.herokuapp.com/'
+
 export default function CreateUser(props) {
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        props.handleUserCreate(email, password, username, bio);
-        setBio('')
-        setUsername('')
-        setPassword('')
-        setEmail('')
-    }
-
-    const [user, setUser] = useState({
-        userId: '',
-        email: '',
-        password: '',
-        username: '',
-        bio: '',
-        img_url: '',
-        bio: '',
-    });
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -35,6 +18,23 @@ export default function CreateUser(props) {
 
     const [imageSelected, setImageSelected] = useState('');
 
+    const [user, setUser] = useState({
+        UserId: '',
+        email: '',
+        password: '',
+        username: '',
+        bio: '',
+        img_url: '',
+    });
+
+    // props.handleUserCreate(email, password, username, bio);
+    //     setBio('')
+    //     setUsername('')
+    //     setPassword('')
+    //     setEmail('')
+    //     setImg_url('')
+
+    
     const uploadImage = () => {
 
         const formData = new FormData()
@@ -49,9 +49,66 @@ export default function CreateUser(props) {
         })
     };
 
+
+    
+
+    const handleNewSubmit = (e) => {
+
+        e.preventDefault();
+        props.handleUserCreate(email, password, username, bio, img_url);
+        setBio('')
+        setUsername('')
+        setPassword('')
+        setEmail('')
+        setImg_url('')
+    }
+    //     setBio((user) => {
+    //     const newValue = {
+    //         email,
+    //         password,
+    //         username,
+    //         bio,
+    //         img_url,
+    //         bio,
+    //     }
+    //     console.log(newValue);
+    //     fetch(`${URL_PREFIX}api/users`, {
+    //         method: 'POST',
+    //         body: JSON.stringify(newValue),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }).then(res => {
+    //         if (!res.ok) {
+    //             setUser({ username: "", email: "", password: "", img_url: "", bio: "" });
+    //             setToken("")
+    //             return;
+    //         }
+    //         return res.json()
+    //     }).then((data) => {
+    //         console.log(data)
+    //         setToken(data.token)
+    //         localStorage.setItem('token', JSON.stringify(data.token))
+    //     })
+    //     return newValue;
+    // })
+
+    const [isVisible, setIsVisible] = useState(true);
+
+    const loggedin = event => {
+        // 👇️ toggle visibility
+        if (!user) {
+        setIsVisible(current => !current);
+        } else {
+            setIsVisible(true);
+        }
+      };
+
+   
+
     return (
         <div className='bg-zinc-800'>
-            <form onSubmit={handleSubmit} className="space-y-8 divide-y divide-gray-200 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 " >
+            <form onSubmit={handleNewSubmit} className="space-y-8 divide-y divide-gray-200 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 " >
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
                         <div>
@@ -179,9 +236,17 @@ export default function CreateUser(props) {
                                     </Link>
                                     <button
                                         type="submit"
+                                        style={{visibility: isVisible ? 'hidden' : 'visible'}}
                                         className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
                                         Create Account
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        style={{visibility: isVisible ? 'visible' : 'hidden'}}
+                                        className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    >
+                                        Edit Profile
                                     </button>
                                 </div>
                             </div>
