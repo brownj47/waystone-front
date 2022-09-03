@@ -14,6 +14,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import FriendsList from '../components/FriendsList';
+import CreateGroup from '../components/CreateGroup';
 import PostList from '../components/PostList';
 import { Image } from 'cloudinary-react';
 
@@ -380,6 +381,7 @@ export function Home(props) {
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4">
 								{/* <FriendsList friends = {userObj.friends} /> */}
+								{userObj.friends?<CreateGroup user={userObj}/>: <></>}
 							</div>
 						</div>
 					</div>
