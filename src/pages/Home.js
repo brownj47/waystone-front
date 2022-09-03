@@ -30,6 +30,7 @@ const navigation = [
 	{ name: 'Home', href: '#', current: true },
 	{ name: 'Profile', href: '#', current: false },
 	{ name: 'Friends', href: '#', current: false },
+	{ name: 'Groups', href: '#', current: false },
 ];
 const userNavigation = [
 	{ name: 'Your Profile', href: '#' },
@@ -387,7 +388,8 @@ export function Home(props) {
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4">
 								{/* <FriendsList friends = {userObj.friends} /> */}
-								{userObj.friends?<CreateGroup user={userObj}/>: <></>}
+								{userObj.friends ? <CreateGroup user={userObj} /> : <></>}
+								{<CreatePost user={userObj} />}
 							</div>
 						</div>
 					</div>

@@ -23,9 +23,9 @@ export default function CreatePost(props) {
 	};
 	return (
 		<>
-			<h1>New Post</h1>
+			<h1 className="text-lime-200">New Post</h1>
 			<form action="#" className="relative" onSubmit={handleSubmit}>
-				<div className="overflow-hidden rounded-lg border border-gray-300 shadow-sm ">
+				<div className="overflow-hidden rounded-lg border border-gray-300 shadow-sm  ">
 					<label htmlFor="title" className="sr-only">
 						Title
 					</label>
@@ -33,7 +33,7 @@ export default function CreatePost(props) {
 						type="text"
 						name="title"
 						id="title"
-						className="block w-full border-0 pt-2.5 text-xl font-medium placeholder-gray-500 "
+						className="block w-full border-0 pt-2.5 text-xl font-medium placeholder-gray-500 px-2 "
 						placeholder="Title"
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
@@ -45,7 +45,7 @@ export default function CreatePost(props) {
 						rows={2}
 						name="description"
 						id="description"
-						className="block w-full h-20 resize-none border-0 py-1 placeholder-gray-500  sm:text-sm"
+						className="block w-full h-20 resize-none border-0 py-1 placeholder-gray-500  sm:text-sm px-2"
 						placeholder="Write a description..."
 						value={post_body}
 						onChange={(e) => setPost_body(e.target.value)}
@@ -66,12 +66,7 @@ export default function CreatePost(props) {
 					{/* Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. */}
 					<div className="flex flex-nowrap justify-end space-x-2 py-2 px-2 sm:px-3"></div>
 					<div className="flex items-center justify-between space-x-3 border-t border-gray-400 px-2 py-2 sm:px-3">
-						<div className="flex">
-							<button
-								type="button"
-								className="group -my-2 -ml-2 inline-flex items-center rounded-full px-3 py-2 text-left text-gray-400"
-							></button>
-						</div>
+						<div className="flex"></div>
 						<div className="flex-shrink-0 ">
 							<button
 								type="submit"
