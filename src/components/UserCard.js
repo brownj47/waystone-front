@@ -3,21 +3,21 @@ import React from 'react';
 export default function UserCard(user) {
 	console.log(user)
 	return (
-		<li key={user._id} className="py-4">
+		<li key={user.user._id} className="py-4">
 			<div className="flex items-center space-x-4">
 				<div className="flex-shrink-0">
 					<img
 						className="h-8 w-8 rounded-full"
-						src={user.img_url}
+						src={user.user.img_url}
 						alt=""
 					/>
 				</div>
 				<div className="min-w-0 flex-1">
 					<p className="truncate text-sm font-medium text-gray-900">
-						{user.email}
+						{user.user.email}
 					</p>
 					<p className="truncate text-sm text-gray-500">
-						{'@' + user.username}
+						{'@' + user.user.username}
 					</p>
 				</div>
 				<div>

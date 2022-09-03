@@ -387,8 +387,8 @@ export function Home(props) {
 
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4">
-								{/* <FriendsList friends = {userObj.friends} /> */}
-								{userObj.friends ? <CreateGroup user={userObj} /> : <></>}
+								{userObj.friends ? <FriendsList friends = {userObj.friends} /> : <></>}
+								{/* {userObj.friends ? <CreateGroup user={userObj} /> : <></>} */}
 								{<CreatePost user={userObj} />}
 							</div>
 						</div>

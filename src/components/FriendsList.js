@@ -17,8 +17,8 @@ function FriendsList(props) {
 						</h2>
 						<div className="mt-6 flow-root">
 							<ul role="list" className="-my-5 divide-y divide-gray-200">
-								{props.friends.map((friend) => (
-									<UserCard friend={friend} key={friend._id} />
+								{props.friends.map((user) => (
+									<UserCard user={user} key={user._id} />
 								))}
 							</ul>
 						</div>
