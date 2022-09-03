@@ -29,6 +29,7 @@ const navigation = [
 	{ name: 'Home', href: '#', current: true },
 	{ name: 'Profile', href: '#', current: false },
 	{ name: 'Friends', href: '#', current: false },
+	{ name: 'Groups', href: '#', current: false },
 ];
 const userNavigation = [
 	{ name: 'Your Profile', href: '#' },
