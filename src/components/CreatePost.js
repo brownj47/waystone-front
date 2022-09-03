@@ -66,12 +66,7 @@ export default function CreatePost(props) {
 					{/* Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. */}
 					<div className="flex flex-nowrap justify-end space-x-2 py-2 px-2 sm:px-3"></div>
 					<div className="flex items-center justify-between space-x-3 border-t border-gray-400 px-2 py-2 sm:px-3">
-						<div className="flex">
-							<button
-								type="button"
-								className="group -my-2 -ml-2 inline-flex items-center rounded-full px-3 py-2 text-left text-gray-400"
-							></button>
-						</div>
+						<div className="flex"></div>
 						<div className="flex-shrink-0 ">
 							<button
 								type="submit"
