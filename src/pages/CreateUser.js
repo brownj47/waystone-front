@@ -93,7 +93,16 @@ export default function CreateUser(props) {
     //     return newValue;
     // })
 
-    
+    const [isVisible, setIsVisible] = useState(true);
+
+    const loggedin = event => {
+        // 👇️ toggle visibility
+        if (!user) {
+        setIsVisible(current => !current);
+        } else {
+            setIsVisible(true);
+        }
+      };
 
    
 
@@ -227,9 +236,17 @@ export default function CreateUser(props) {
                                     </Link>
                                     <button
                                         type="submit"
+                                        style={{visibility: isVisible ? 'hidden' : 'visible'}}
                                         className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
                                         Create Account
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        style={{visibility: isVisible ? 'visible' : 'hidden'}}
+                                        className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    >
+                                        Edit Profile
                                     </button>
                                 </div>
                             </div>

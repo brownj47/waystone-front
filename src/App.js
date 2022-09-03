@@ -98,7 +98,8 @@ const App = () => {
 		email: '',
 		UserId: '',
 		username:'',
-		img_url:''
+		img_url:'',
+		UserId: '',
 	});
 	const [token, setToken] = useState('');
 
@@ -170,6 +171,7 @@ const App = () => {
 				return res.json()
 			}).then((data) => {
 				console.log(data)
+				setUser(data.user._id)
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
 				navigate('/home')
