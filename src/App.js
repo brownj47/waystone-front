@@ -145,13 +145,14 @@ const App = () => {
 		})
 	}
 
-	const handleUserCreate = async (email, password, username, bio)=>{
+	const handleUserCreate = async (email, password, username, bio, img_url)=>{
 		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
 				email,
 				password,
 				username, 
-				bio
+				bio,
+				img_url
 			}
 			console.log(modifiedValue);
 			fetch(`${URL_PREFIX}api/users`, {
@@ -208,7 +209,7 @@ const App = () => {
 						UserId: user.id,
 						// ...user
 					})
-					navigate('/home')
+					// navigate('/home')
 				})
 			}
 		})
