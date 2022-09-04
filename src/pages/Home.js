@@ -20,18 +20,6 @@ import PostList from '../components/PostList';
 import { Image } from 'cloudinary-react';
 import CreatePost from '../components/CreatePost';
 
-const navigation = [
-	{ name: 'Home', href: '/', current: true },
-	{ name: 'Profile', href: '#', current: false },
-	{ name: 'Friends', href: '#', current: false },
-	{ name: 'Groups', href: '#', current: false },
-];
-
-
-function classNames(...classes) {
-	return classes.filter(Boolean).join(' ');
-}
-
 export function Home(props) {
 
 	// user state and hooks
@@ -91,14 +79,6 @@ export function Home(props) {
 
 	return (
 		<>
-			{/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
 			<div className="min-h-full">
 				<Popover
 					as="header"
@@ -142,7 +122,7 @@ export function Home(props) {
 													<span className="sr-only">Open user menu</span>
 													<img
 														className="h-8 w-8 rounded-full"
-														src={userObj.imageUrl}
+														src={userObj.img_url}
 														alt="Profile Pic"
 													/>
 												</Menu.Button>
