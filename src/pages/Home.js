@@ -19,9 +19,9 @@ import CreateGroup from '../components/CreateGroup';
 import PostList from '../components/PostList';
 import { Image } from 'cloudinary-react';
 import CreatePost from '../components/CreatePost';
+import RandFriendPopOut from '../components/RandFriendPopOut';
 
 export function Home(props) {
-
 	// user state and hooks
 	console.log(props);
 	const [userObj, setUserObj] = useState({});
@@ -137,28 +137,30 @@ export function Home(props) {
 													<Menu.Item>
 														<a
 															href={'/profile'}
-															className='block px-4 py-2 text-sm text-gray-700'
-															onClick={() => { }}
-														>Your Profile</a>
-
+															className="block px-4 py-2 text-sm text-gray-700"
+															onClick={() => {}}
+														>
+															Your Profile
+														</a>
 													</Menu.Item>
 													<Menu.Item>
 														<a
 															href={'#'}
-															className='block px-4 py-2 text-sm text-gray-700'
-															onClick={() => { }}
-														>Settings</a>
-
+															className="block px-4 py-2 text-sm text-gray-700"
+															onClick={() => {}}
+														>
+															Settings
+														</a>
 													</Menu.Item>
 													<Menu.Item>
 														<a
 															href={'#'}
-															className='block px-4 py-2 text-sm text-gray-700'
+															className="block px-4 py-2 text-sm text-gray-700"
 															onClick={props.handleLogout}
-														>Logout</a>
-
+														>
+															Logout
+														</a>
 													</Menu.Item>
-
 												</Menu.Items>
 											</Transition>
 										</Menu>
@@ -169,10 +171,30 @@ export function Home(props) {
 											{/* Left nav */}
 											<div className="hidden lg:col-span-2 lg:block">
 												<nav className="flex space-x-4">
-													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/home'}>Home</Link>
-													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/profile'}>Profile</Link>
-													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/friends'}>Friends</Link>
-													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/groups'}>Groups</Link>
+													<Link
+														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+														to={'/home'}
+													>
+														Home
+													</Link>
+													<Link
+														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+														to={'/profile'}
+													>
+														Profile
+													</Link>
+													<Link
+														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+														to={'/friends'}
+													>
+														Friends
+													</Link>
+													<Link
+														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+														to={'/groups'}
+													>
+														Groups
+													</Link>
 												</nav>
 											</div>
 											<div className="px-12 lg:px-0">
@@ -270,10 +292,30 @@ export function Home(props) {
 														</div>
 													</div>
 													<div className="mt-3 space-y-1 px-2">
-														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/home'}>Home</Link>
-														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/profile'}>Profile</Link>
-														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/friends'}>Friends</Link>
-														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/groups'}>Groups</Link>
+														<Link
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															to={'/home'}
+														>
+															Home
+														</Link>
+														<Link
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															to={'/profile'}
+														>
+															Profile
+														</Link>
+														<Link
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															to={'/friends'}
+														>
+															Friends
+														</Link>
+														<Link
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															to={'/groups'}
+														>
+															Groups
+														</Link>
 													</div>
 												</div>
 												<div className="pt-4 pb-2">
@@ -346,14 +388,23 @@ export function Home(props) {
 
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4">
-								{userObj.friends ? <FriendsList friends={userObj.friends} /> : <></>}
-								{userObj.friends ? <CreateGroup user={{ ...userObj }} /> : <></>}
+								{userObj.friends ? (
+									<FriendsList friends={userObj.friends} />
+								) : (
+									<></>
+								)}
+								{userObj.friends ? (
+									<CreateGroup user={{ ...userObj }} />
+								) : (
+									<></>
+								)}
 								{<CreatePost user={userObj} />}
 							</div>
 						</div>
 					</div>
 				</main>
 			</div>
+			<RandFriendPopOut />
 		</>
 	);
 }
