@@ -4,6 +4,7 @@ import './App.css';
 import { Route, Routes, Link, useNavigate, Navigate, Outlet } from 'react-router-dom';
 import { Home } from './pages/Home';
 import CreateUser from './pages/CreateUser';
+import GroupPage from './pages/groupPage';
 import Login from './pages/login';
 import API from './utils/API';
 import { data } from 'autoprefixer';
@@ -242,7 +243,7 @@ const App = () => {
 				</ProtectedRouteTest> */}
 				<Route element={<ProtectedRoute user={user} />} >
 					<Route path="/home" element={<Home user={user}handleLogout={handleLogout} />} />
-					<Route path="/groups" element={<groupPage user={user} handleLogout={handleLogout}/>} />
+					<Route path="/groups" element={<GroupPage user={user} handleLogout={handleLogout}/>} />
 				</Route>
 				<Route path="/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
