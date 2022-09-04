@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect } from 'react';
-import { Menu, Popover, Transition } from '@headlessui/react';
 import API from '../utils/API';
+import { Menu, Popover, Transition } from '@headlessui/react';
+import { Link } from 'react-router-dom';
 import {
 	AcademicCapIcon,
 	BanknotesIcon,
@@ -20,22 +21,19 @@ import { Image } from 'cloudinary-react';
 import CreatePost from '../components/CreatePost';
 
 const navigation = [
-	{ name: 'Home', href: '#', current: true },
+	{ name: 'Home', href: '/', current: true },
 	{ name: 'Profile', href: '#', current: false },
 	{ name: 'Friends', href: '#', current: false },
 	{ name: 'Groups', href: '#', current: false },
 ];
+
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
 export function Home(props) {
-	const userNavigation = [
-		{ name: 'Your Profile', href: '/profile' },
-		{ name: 'Settings', href: '/settings' },
-		{ name: 'Sign out', function: props.handleLogout },
-	];
+
 	// user state and hooks
 	console.log(props);
 	const [userObj, setUserObj] = useState({});
@@ -191,19 +189,10 @@ export function Home(props) {
 											{/* Left nav */}
 											<div className="hidden lg:col-span-2 lg:block">
 												<nav className="flex space-x-4">
-													{navigation.map((item) => (
-														<a
-															key={item.name}
-															href={item.href}
-															className={classNames(
-																item.current ? 'text-white' : 'text-zinc-800',
-																'text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'
-															)}
-															aria-current={item.current ? 'page' : undefined}
-														>
-															{item.name}
-														</a>
-													))}
+													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/home'}>Home</Link>
+													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/profile'}>Profile</Link>
+													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/friends'}>Friends</Link>
+													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/groups'}>Groups</Link>
 												</nav>
 											</div>
 											<div className="px-12 lg:px-0">
@@ -301,15 +290,10 @@ export function Home(props) {
 														</div>
 													</div>
 													<div className="mt-3 space-y-1 px-2">
-														{navigation.map((item) => (
-															<a
-																key={item.name}
-																href={item.href}
-																className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-															>
-																{item.name}
-															</a>
-														))}
+														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/home'}>Home</Link>
+														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/profile'}>Profile</Link>
+														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/friends'}>Friends</Link>
+														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/groups'}>Groups</Link>
 													</div>
 												</div>
 												<div className="pt-4 pb-2">
