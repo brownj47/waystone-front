@@ -4,6 +4,7 @@ import './App.css';
 import { Route, Routes, Link, useNavigate, Navigate, Outlet } from 'react-router-dom';
 import { Home } from './pages/Home';
 import CreateUser from './pages/CreateUser';
+import GroupPage from './pages/groupPage';
 import Login from './pages/login';
 import API from './utils/API';
 import { data } from 'autoprefixer';
@@ -98,8 +99,7 @@ const App = () => {
 		email: '',
 		UserId: '',
 		username:'',
-		img_url:'',
-		UserId: '',
+		img_url:''
 	});
 	const [token, setToken] = useState('');
 
@@ -146,14 +146,13 @@ const App = () => {
 		})
 	}
 
-	const handleUserCreate = async (email, password, username, bio, img_url)=>{
+	const handleUserCreate = async (email, password, username, bio)=>{
 		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
 				email,
 				password,
 				username, 
-				bio,
-				img_url
+				bio
 			}
 			console.log(modifiedValue);
 			fetch(`${URL_PREFIX}api/users`, {
@@ -171,7 +170,6 @@ const App = () => {
 				return res.json()
 			}).then((data) => {
 				console.log(data)
-				setUser(data.user._id)
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
 				navigate('/home')
@@ -211,7 +209,7 @@ const App = () => {
 						UserId: user.id,
 						// ...user
 					})
-					// navigate('/home')
+					navigate('/home')
 				})
 			}
 		})
@@ -244,7 +242,8 @@ const App = () => {
 					<Home/>
 				</ProtectedRouteTest> */}
 				<Route element={<ProtectedRoute user={user} />} >
-					<Route path="/home" element={<Home user={user} />} />
+					<Route path="/home" element={<Home user={user}handleLogout={handleLogout} />} />
+					<Route path="/groups" element={<GroupPage user={user} handleLogout={handleLogout}/>} />
 				</Route>
 				<Route path="/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
@@ -288,9 +287,6 @@ const App = () => {
 				</div>
 
 			</footer>
-			<button onClick={() => { checkToken(token) }}>CheckToken</button>
-			<br />
-			<button onClick={handleLogout}>LogOUt</button>
 		</>
 	);
 }
