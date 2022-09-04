@@ -286,7 +286,6 @@ const App = () => {
 				</div>
 
 			</footer>
-			<button onClick={handleLogout}>Log Out</button>
 		</>
 	);
 }
