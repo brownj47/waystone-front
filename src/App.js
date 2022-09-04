@@ -98,8 +98,7 @@ const App = () => {
 		email: '',
 		UserId: '',
 		username:'',
-		img_url:'',
-		UserId: '',
+		img_url:''
 	});
 	const [token, setToken] = useState('');
 
@@ -146,14 +145,13 @@ const App = () => {
 		})
 	}
 
-	const handleUserCreate = async (email, password, username, bio, img_url)=>{
+	const handleUserCreate = async (email, password, username, bio)=>{
 		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
 				email,
 				password,
 				username, 
-				bio,
-				img_url
+				bio
 			}
 			console.log(modifiedValue);
 			fetch(`${URL_PREFIX}api/users`, {
@@ -171,7 +169,6 @@ const App = () => {
 				return res.json()
 			}).then((data) => {
 				console.log(data)
-				setUser(data.user._id)
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
 				navigate('/home')
@@ -211,7 +208,7 @@ const App = () => {
 						UserId: user.id,
 						// ...user
 					})
-					// navigate('/home')
+					navigate('/home')
 				})
 			}
 		})
