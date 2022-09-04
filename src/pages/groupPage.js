@@ -19,11 +19,36 @@ import PostList from '../components/PostList';
 import { Image } from 'cloudinary-react';
 import CreatePost from '../components/CreatePost';
 
+const user = {
+	name: 'Chelsea Hagon',
+	email: 'chelsea.hagon@example.com',
+	role: 'Human Resources Manager',
+	imageUrl:
+		'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+};
 const navigation = [
 	{ name: 'Home', href: '#', current: true },
 	{ name: 'Profile', href: '#', current: false },
 	{ name: 'Friends', href: '#', current: false },
 	{ name: 'Groups', href: '#', current: false },
+];
+const userNavigation = [
+	{ name: 'Your Profile', href: '#' },
+	{ name: 'Settings', href: '#' },
+	{ name: 'Sign out', href: '#' },
+];
+const stats = [
+	{ label: 'Friends Online', value: 12 },
+	{ label: 'Requests', value: 4 },
+	{ label: 'Messages', value: 2 },
+];
+
+const posts = [
+	{ id: 1, content: 'post1' },
+	{ id: 2, content: 'post2' },
+	{ id: 3, content: 'post3' },
+	{ id: 4, content: 'post4' },
+	// More items...
 ];
 
 function classNames(...classes) {
@@ -31,14 +56,14 @@ function classNames(...classes) {
 }
 
 export function Home(props) {
-	const userNavigation = [
-		{ name: 'Your Profile', href: '/profile' },
-		{ name: 'Settings', href: '/settings' },
-		{ name: 'Sign out', function: props.handleLogout },
-	];
 	// user state and hooks
 	console.log(props);
 	const [userObj, setUserObj] = useState({});
+	const [UserId, setUserId] = useState(props.user.UserId);
+	const [username, setUsername] = useState();
+	const [password, setPassword] = useState();
+	const [email, setEmail] = useState();
+	const [isDeactivated, setIsDeactivated] = useState(false);
 
 	useEffect(() => {
 		API.getOneUser(props.user.UserId)
@@ -121,7 +146,7 @@ export function Home(props) {
 										/>
 										<Image
 											cloudName="diuo4ygwd"
-											publicId={userObj.img_url}
+											publicId={user.img_url}
 											style={{ width: 250 }}
 										/>
 									</div>
@@ -144,8 +169,8 @@ export function Home(props) {
 													<span className="sr-only">Open user menu</span>
 													<img
 														className="h-8 w-8 rounded-full"
-														src={userObj.imageUrl}
-														alt="Profile Pic"
+														src={user.imageUrl}
+														alt=""
 													/>
 												</Menu.Button>
 											</div>
@@ -156,31 +181,21 @@ export function Home(props) {
 												leaveTo="transform opacity-0 scale-95"
 											>
 												<Menu.Items className="absolute -right-2 z-10 mt-2 w-48 origin-top-right rounded-md bg-lime-200 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-													<Menu.Item>
-														<a
-															href={'/profile'}
-															className='block px-4 py-2 text-sm text-gray-700'
-															onClick={() => { }}
-														>Your Profile</a>
-
-													</Menu.Item>
-													<Menu.Item>
-														<a
-															href={'#'}
-															className='block px-4 py-2 text-sm text-gray-700'
-															onClick={() => { }}
-														>Settings</a>
-
-													</Menu.Item>
-													<Menu.Item>
-														<a
-															href={'#'}
-															className='block px-4 py-2 text-sm text-gray-700'
-															onClick={props.handleLogout}
-														>Logout</a>
-
-													</Menu.Item>
-													
+													{userNavigation.map((item) => (
+														<Menu.Item key={item.name}>
+															{({ active }) => (
+																<a
+																	href={item.href}
+																	className={classNames(
+																		active ? 'bg-lime-400' : '',
+																		'block px-4 py-2 text-sm text-gray-700'
+																	)}
+																>
+																	{item.name}
+																</a>
+															)}
+														</Menu.Item>
+													))}
 												</Menu.Items>
 											</Transition>
 										</Menu>
@@ -317,16 +332,16 @@ export function Home(props) {
 														<div className="flex-shrink-0">
 															<img
 																className="h-10 w-10 rounded-full"
-																src={userObj.imageUrl}
-																alt="Profile pic"
+																src={user.imageUrl}
+																alt=""
 															/>
 														</div>
 														<div className="ml-3 min-w-0 flex-1">
 															<div className="truncate text-base font-medium text-gray-800">
-																{userObj.name}
+																{user.name}
 															</div>
 															<div className="truncate text-sm font-medium text-gray-500">
-																{userObj.email}
+																{user.email}
 															</div>
 														</div>
 														<button
@@ -372,8 +387,8 @@ export function Home(props) {
 
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4">
-								{userObj.friends ? <FriendsList friends={userObj.friends} /> : <></>}
-								{userObj.friends ? <CreateGroup user={{ ...userObj }} /> : <></>}
+								{userObj.friends ?<FriendsList friends = {userObj.friends} />:<></>}
+								{userObj.friends ? <CreateGroup user={{...userObj}} /> : <></>}
 								{<CreatePost user={userObj} />}
 							</div>
 						</div>

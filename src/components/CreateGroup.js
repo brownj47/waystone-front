@@ -63,13 +63,13 @@ const CreateGroup = (props) => {
 					return (
 						<>
 							<button
-								key={friend}
+								key={friend._id}
 								onClick={(e) => {
-									setMembersToAdd([...membersToAdd, friend]);
+									setMembersToAdd([...membersToAdd, friend._id]);
 									e.target.showComponent = false;
 								}}
 							>
-								{friend}
+								{friend.username}
 							</button>
 
 							<br />

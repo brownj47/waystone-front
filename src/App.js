@@ -241,7 +241,8 @@ const App = () => {
 					<Home/>
 				</ProtectedRouteTest> */}
 				<Route element={<ProtectedRoute user={user} />} >
-					<Route path="/home" element={<Home user={user} />} />
+					<Route path="/home" element={<Home user={user}handleLogout={handleLogout} />} />
+					<Route path="/groups" element={<groupPage user={user} handleLogout={handleLogout}/>} />
 				</Route>
 				<Route path="/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
@@ -285,9 +286,7 @@ const App = () => {
 				</div>
 
 			</footer>
-			<button onClick={() => { checkToken(token) }}>CheckToken</button>
-			<br />
-			<button onClick={handleLogout}>LogOUt</button>
+			<button onClick={handleLogout}>Log Out</button>
 		</>
 	);
 }
