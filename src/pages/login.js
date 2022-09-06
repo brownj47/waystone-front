@@ -127,7 +127,7 @@ export default function Login(props) {
 							</button>
 						</div>
 						<div>
-							<Link to={{ pathname: `/CreateUser` }}>
+							<Link to={{ pathname: `waystone-front/CreateUser` }}>
 								<button
 									type="submit"
 									className="group relative flex w-full justify-center rounded-md border border-transparent bg-lime-400 py-2 px-4 text-sm font-medium text-zinc-800 hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200 focus:ring-offset-2"
