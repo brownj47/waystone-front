@@ -44,18 +44,20 @@ export default function Profile(props) {
 				setUserObj(user);
 				console.log(user);
 			}).then(() => {
+                console.log('==============================================');
 				console.log(userObj);
+                console.log('==============================================');
 			})
 	}, [props.user.UserId]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
        
-        props.handleEditUser(userObj.UserId, email, password, username, bio, img_url);
-        setBio('')
+        props.handleEditUser(userObj.id, username, email, password, bio, img_url);
         setUsername('')
-        setPassword('')
         setEmail('')
+        setPassword('')
+        setBio('')
         setImg_url('')
     }
 
@@ -73,8 +75,6 @@ export default function Profile(props) {
     const [password, setPassword] = useState('');
     const [bio, setBio] = useState('');
     const [img_url, setImg_url] = useState('');
-    const [token, setToken] = useState('');
-    const [UserId, setUserId] = useState('');
 
     const [imageSelected, setImageSelected] = useState('');
 

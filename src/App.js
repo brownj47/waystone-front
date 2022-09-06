@@ -200,43 +200,41 @@ const App = () => {
 	}, []);
 
 	// edit profile page
-	const handleEditUser = async (UserId, email, password, username, bio, img_url)=>{
+	const handleEditUser = async (UserId, username, email, password, bio, img_url)=>{
 		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
-				UserId,
-				username,
-				email,
-				password,
-				bio,
-				img_url
+				UserId, username, email, password, bio, img_url
 			}
-	
+			const updatedUser = {};
 			console.log(modifiedValue);
-			fetch(`${URL_PREFIX}api/users/user/${UserId}`, {
-				method: 'PUT',
-				body: JSON.stringify(modifiedValue),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}).then(res => {
+			API.updateUser(UserId, username, email, password, bio, img_url) 
+			
+			.then(res => {
+				console.log('==============================================')
+				console.log(res);
+				console.log('==============================================')
+				console.log('==============================================')
 				if (!res.ok) {
 					setUser({ username: "", email: "" });
 					setToken("")
 					return;
 				}
+				
 				return res.json()
+				
 			}).then((data) => {
 				console.log('==============================================')
 				console.log(data)
-				modifiedValue.email = data.user.email
-				modifiedValue.username = data.user.username
-				modifiedValue.img_url = data.user.img_url
-				modifiedValue.UserId = data.user._id
+				updatedUser.email = data.user.email
+				updatedUser.username = data.user.username
+				updatedUser.img_url = data.user.img_url
+				updatedUser.UserId = data.user._id
+				updatedUser.bio = data.user.bio
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
 				navigate('/home')
 			})
-			return modifiedValue;
+			return updatedUser;
 		})
 	}
 

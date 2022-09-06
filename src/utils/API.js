@@ -68,14 +68,16 @@ const API = {
 	},
 
 	// updates a user at a UserId
-	updateUser: (UserId, username, email, password) => {
-		return fetch(`${URL_PREFIX}/users/user`, {
-			method: 'POST',
+	updateUser: (UserId, username, email, password, bio, img_url) => {
+		return fetch(`${URL_PREFIX}/users/user/${UserId}`, {
+			method: 'PUT',
 			body: JSON.stringify({
 				UserId,
 				username,
 				email,
-				password
+				password,
+				img_url,
+				bio
 			}),
 			headers: {
 				'Content-Type': 'application/json'
