@@ -4,7 +4,7 @@ import './App.css';
 import { Route, Routes, Link, useNavigate, Navigate, Outlet } from 'react-router-dom';
 import { Home } from './pages/Home';
 import CreateUser from './pages/CreateUser';
-import GroupPage from './pages/groupPage';
+import GroupPage from './pages/GroupPage';
 import Login from './pages/login';
 import API from './utils/API';
 import { data } from 'autoprefixer';
