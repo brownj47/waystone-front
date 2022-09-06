@@ -89,7 +89,7 @@ const navigation = {
 
 const ProtectedRoute = ({ user}) => {
 
-	return user? <Outlet/>: <Navigate to={'/login'} />
+	return user? <Outlet/>: <Navigate to={'/waystone-front/login'} />
 
 }
 const App = () => {
@@ -139,7 +139,7 @@ const App = () => {
 				foundUser.UserId = data.user._id
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
-				navigate('/home')
+				navigate('/waystone-front/home')
 				
 			})
 			return foundUser;
@@ -179,7 +179,7 @@ const App = () => {
 				foundUser.UserId = data.user._id
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
-				navigate('/home')
+				navigate('/waystone-front/home')
 			})
 			return foundUser;
 		})
@@ -201,7 +201,7 @@ const App = () => {
 					username:'',
 					img_url:''
 				})
-				navigate(`/login`)
+				navigate(`/waystone-front/login`)
 			}
 			else {
 				console.log("valid token")
@@ -216,7 +216,7 @@ const App = () => {
 						UserId: user.id,
 						// ...user
 					})
-					navigate('/home')
+					navigate('/waystone-front/home')
 				})
 			}
 		})
@@ -229,7 +229,7 @@ const App = () => {
 			email: '',
 			password: ''
 		})
-		navigate("/login");
+		navigate("/waystone-front/login");
 	};
 
 	useEffect(() => {
