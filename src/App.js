@@ -146,14 +146,16 @@ const App = () => {
 		})
 	}
 
-	const handleUserCreate = async (email, password, username, bio)=>{
+	const handleUserCreate = async (email, password, username, bio, img_url)=>{
 		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
 				email,
 				password,
 				username, 
-				bio
+				bio, 
+				img_url
 			}
+			const foundUser={}
 			console.log(modifiedValue);
 			fetch(`${URL_PREFIX}api/users`, {
 				method: 'POST',
@@ -169,12 +171,17 @@ const App = () => {
 				}
 				return res.json()
 			}).then((data) => {
+				console.log('==============================================')
 				console.log(data)
+				foundUser.email = data.user.email
+				foundUser.username = data.user.username
+				foundUser.img_url = data.user.img_url
+				foundUser.UserId = data.user._id
 				setToken(data.token)
 				localStorage.setItem('token', JSON.stringify(data.token))
 				navigate('/home')
 			})
-			return modifiedValue;
+			return foundUser;
 		})
 	}
 
