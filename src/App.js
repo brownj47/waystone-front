@@ -15,6 +15,7 @@ import GroupPage from './pages/groupPage';
 import Login from './pages/login';
 import API from './utils/API';
 import { data } from 'autoprefixer';
+import Profile from './pages/profile';
 
 const URL_PREFIX = 'https://waystoneapi.herokuapp.com/';
 
@@ -198,6 +199,47 @@ const App = () => {
 		checkToken(storedToken);
 	}, []);
 
+	// edit profile page
+	const handleEditUser = async (UserId, email, password, username, bio, img_url)=>{
+		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
+			const modifiedValue = {
+				UserId,
+				username,
+				email,
+				password,
+				bio,
+				img_url
+			}
+	
+			console.log(modifiedValue);
+			fetch(`${URL_PREFIX}api/users/user/${UserId}`, {
+				method: 'PUT',
+				body: JSON.stringify(modifiedValue),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(res => {
+				if (!res.ok) {
+					setUser({ username: "", email: "" });
+					setToken("")
+					return;
+				}
+				return res.json()
+			}).then((data) => {
+				console.log('==============================================')
+				console.log(data)
+				modifiedValue.email = data.user.email
+				modifiedValue.username = data.user.username
+				modifiedValue.img_url = data.user.img_url
+				modifiedValue.UserId = data.user._id
+				setToken(data.token)
+				localStorage.setItem('token', JSON.stringify(data.token))
+				navigate('/home')
+			})
+			return modifiedValue;
+		})
+	}
+
 	return (
 		<>
 			<Routes>
@@ -224,7 +266,9 @@ const App = () => {
 					path="/waystone-front/login"
 					element={<Login handleLogin={handleLogin} />}
 				/>
+				<Route path="/waystone-front/profile" element={<Profile user={user} handleLogout={handleLogout} handleEditUser={handleEditUser}/>} />
 				<Route path="/waystone-front/*" element={<h1>404 Page Not Found</h1>} />
+				
 			</Routes>
 
 			<footer className="bg-zinc-800 h-96 p-5">
