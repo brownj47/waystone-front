@@ -24,6 +24,7 @@ import FriendRequestList from '../components/FriendRequstList';
 import { Image } from 'cloudinary-react';
 import CreatePost from '../components/CreatePost';
 import RandFriendPopOut from '../components/RandFriendPopOut';
+import PostCard from '../components/PostCard';
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
@@ -32,6 +33,7 @@ export function Home(props) {
 	// user state and hooks
 	console.log(props);
 	const [userObj, setUserObj] = useState({});
+	const [randUserObj, setRandUserObj] = useState({});
 	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
@@ -45,47 +47,61 @@ export function Home(props) {
 			.catch((err) => console.error(err));
 	}, [props.user.UserId]);
 
-	// useEffect(()=>{
-	// 	API.getOneUser(UserId).then(res=>res.json()).then(user=>{
-	// 	setUserObj(user)
-	// 	})
-	// }, [])
+	useEffect(() => {
+		API.randomUser()
+			.then((res) => res.json())
+			.then((user) => {
+				setRandUserObj(user);
+				console.log(user);
+			})
+			.catch((err) => console.error(err));
+	}, []);
 
-	// const updateUser=e=>{
-	//     e.preventDefault();
-	//     API.updateUser(UserId, username, email, password).then(res=>res.json()).then(user=>{
-	//         console.log(user);
-	//     })
-	// }
+	const findNewRandUser = () => {
+		API.randomUser()
+			.then((res) => res.json())
+			.then((user) => {
+				setRandUserObj(user);
+				console.log(user);
+			})
+			.catch((err) => console.error(err));
+	};
 
-	// const requestFriend=e=>{
-	//     e.preventDefault();
-	//     API.requestFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
-	//         console.log(user);
-	//     })
-	// }
+	const sendFriendRequest = (UserId, RecipientId) => {
+		console.log(UserId)
+		console.log(RecipientId)
+		API.requestFriend(UserId, RecipientId)
+			.then((res) => res.json())
+			.then(() => {
+				findNewRandUser()
+				console.log("REQUEST SENT!");
+			})
+			.catch((err) => console.error(err));
+	};
 
-	// const acceptFriend=e=>{
-	//     e.preventDefault();
-	//     API.acceptFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
-	//         console.log(user);
-	//     })
-	// }
+	const acceptFriendRequest = (UserId, SenderId) => {
+		console.log(UserId)
+		console.log(SenderId)
+		API.acceptFriend(UserId, SenderId)
+			.then((res) => res.json())
+			.then(() => {
+				findNewRandUser()
+				console.log("ACCEPTED!");
+			})
+			.catch((err) => console.error(err));
+	};
 
-	// const denyFriend=e=>{
-	//     e.preventDefault();
-	//     API.denyFriend(UserId, FriendId).then(res=>res.json()).then(user=>{
-	//         console.log(user);
-	//     })
-	// }
-
-	// const deactivateUser=e=>{
-	//     e.preventDefault();
-	// 	setIsDeactivated(true)
-	//     API.deactivateUser(UserId, isDeactivated).then(res=>res.json()).then(user=>{
-	//         console.log(user);
-	//     })
-	// }
+	const denyFriendRequest = (UserId, SenderId) => {
+		console.log(UserId)
+		console.log(SenderId)
+		API.denyFriend(UserId, SenderId)
+			.then((res) => res.json())
+			.then(() => {
+				findNewRandUser()
+				console.log("DENIED!");
+			})
+			.catch((err) => console.error(err));
+	};
 
 	return (
 		<>
@@ -183,25 +199,25 @@ export function Home(props) {
 												<nav className="flex space-x-4">
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/home'}
+														to={'/waystone-front/home'}
 													>
 														Home
 													</Link>
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/profile'}
+														to={'/waystone-front/profile'}
 													>
 														Profile
 													</Link>
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/friends'}
+														to={'/waystone-front/friends'}
 													>
 														Friends
 													</Link>
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/groups'}
+														to={'/waystone-front/groups'}
 													>
 														Groups
 													</Link>
@@ -456,7 +472,7 @@ export function Home(props) {
 														<div className="relative h-40 sm:h-56">
 															<img
 																className="absolute h-full w-full object-cover"
-																src="https://images.unsplash.com/photo-1501031170107-cfd33f0cbdcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&h=600&q=80"
+																src={randUserObj.img_url}
 																alt=""
 															/>
 														</div>
@@ -466,26 +482,28 @@ export function Home(props) {
 																	<div className="flex items-center">
 																		<h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
 																			{/* RandomUSer Username */}
-																			Ashley Porter
+																			{randUserObj.username}
 																		</h3>
 																		<span className="ml-2.5 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-green-400">
 																			<span className="sr-only">Online</span>
 																		</span>
 																	</div>
 																	<p className="text-sm text-gray-700">
-																		@ashleyporter
+																	{randUserObj.username}
 																	</p>
 																</div>
 																<div className="mt-5 flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3">
 																	<button
 																		type="button"
 																		className="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md border border-transparent hover:bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:flex-1"
+																		onClick={()=> findNewRandUser()}
 																	>
 																		Skip
 																	</button>
 																	<button
 																		type="button"
 																		className="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:flex-1"
+																		onClick={()=> sendFriendRequest(userObj.id, randUserObj.id)}
 																	>
 																		Request Friend
 																	</button>
@@ -546,18 +564,34 @@ export function Home(props) {
 															<h1 className="font-bold text-lg">Bio:</h1>
 															<p>
 																{/* insert SelectedRandomUser.bio */}
-																Bio goes here for the random user Bio goes here
-																for the random user Bio goes here for the random
-																user Bio goes here for the random user Bio goes
-																here for the random user Bio goes here for the
-																random user Bio goes here for the random user
-																Bio goes here for the random user Bio goes here
-																for the random user
+																{randUserObj.bio}
 															</p>
 														</div>
 														<div>
 															{/* insert random user post here */}
-															<PostList />
+															{randUserObj.posts && randUserObj.posts.length?
+															(<div className="grid grid-cols-1 gap-4 lg:col-span-2 overflow-auto">
+																<section aria-labelledby="quick-links-title">
+																	<div className="bg-white w-full  rounded-lg">
+																		<ul role="list" className="divide-y divide-lime-400">
+																			{randUserObj.posts.map((post) => (
+																				<PostCard {...post} key={post._id} />
+																			))}
+																		</ul>
+																		<p>test</p>
+																	</div>
+																</section>
+															</div>)
+															:
+															(<div className="grid grid-cols-1 gap-4 lg:col-span-2 overflow-auto">
+															 	{/* POST PANEL */}
+																<section aria-labelledby="quick-links-title">
+																	<div className="bg-white w-full  rounded-lg">
+																		<h1>This user has no posts.</h1>
+																	</div>
+																</section>
+															</div>)
+															}
 														</div>
 													</dl>
 												</div>
