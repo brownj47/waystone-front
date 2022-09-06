@@ -70,7 +70,7 @@ const API = {
 	// updates a user at a UserId
 	updateUser: (UserId, username, email, password) => {
 		return fetch(`${URL_PREFIX}/users/user`, {
-			method: 'POST',
+			method: 'PUT',
 			body: JSON.stringify({
 				UserId,
 				username,
