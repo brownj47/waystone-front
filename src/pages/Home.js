@@ -62,6 +62,7 @@ export function Home(props) {
 	const [UserId, setUserId] = useState(props.user.UserId);
 	const [username, setUsername] = useState();
 	const [password, setPassword] = useState();
+	const [img_url, setImg_url] = useState(props.user.img_url);
 	const [email, setEmail] = useState();
 	const [isDeactivated, setIsDeactivated] = useState(false);
 
@@ -146,8 +147,8 @@ export function Home(props) {
 										/>
 										<Image
 											cloudName="diuo4ygwd"
-											publicId={user.img_url}
-											style={{ width: 250 }}
+											publicId={img_url}
+											style={{ width: 50 }}
 										/>
 									</div>
 									<h1>Hello {userObj.username}!</h1>
@@ -330,10 +331,10 @@ export function Home(props) {
 												<div className="pt-4 pb-2">
 													<div className="flex items-center px-5">
 														<div className="flex-shrink-0">
-															<img
-																className="h-10 w-10 rounded-full"
-																src={user.imageUrl}
-																alt=""
+															<Image
+																cloudName="diuo4ygwd"
+																publicId={img_url}
+																style={{ width: 50 }}
 															/>
 														</div>
 														<div className="ml-3 min-w-0 flex-1">
