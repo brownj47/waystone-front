@@ -31,7 +31,7 @@ export function Home(props) {
 	// user state and hooks
 	console.log(props);
 	const [userObj, setUserObj] = useState({});
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
 		console.log(props);
