@@ -27,7 +27,7 @@ export default function Login(props) {
         ```
       */}
 
-			<div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-zinc-800">
+			<div className="flex h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-zinc-800 ">
 				<div className="w-full max-w-md space-y-8">
 					<div>
 						<img
@@ -37,7 +37,7 @@ export default function Login(props) {
 							src="https://i.ibb.co/zmHz8jh/waystone.png"
 							alt="Workflow"
 						/>
-						<h3 className="mt-6 text-center text-2xl font-bold tracking-tight text-zinc-800 bg-lime-400">
+						<h3 className="mt-6 text-center text-2xl font-bold tracking-tight text-zinc-800 bg-gradient-to-r from-lime-500 to-lime-400 rounded-md border border-transparent">
 							Welcome to Mordekainen's Waystone
 						</h3>
 						<br />
