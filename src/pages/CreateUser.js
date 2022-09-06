@@ -10,22 +10,13 @@ export default function CreateUser(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.handleUserCreate(email, password, username, bio);
+        props.handleUserCreate(email, password, username, bio, img_url);
         setBio('')
         setUsername('')
         setPassword('')
         setEmail('')
+        setImg_url('')
     }
-
-    const [user, setUser] = useState({
-        userId: '',
-        email: '',
-        password: '',
-        username: '',
-        bio: '',
-        img_url: '',
-        bio: '',
-    });
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -191,7 +182,7 @@ export default function CreateUser(props) {
                 </div>
             </form>
         </div>
-                )
+    )
 
 };
 

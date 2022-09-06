@@ -27,12 +27,13 @@ export function Home(props) {
 	const [userObj, setUserObj] = useState({});
 
 	useEffect(() => {
+		console.log(props)
 		API.getOneUser(props.user.UserId)
 			.then((res) => res.json())
 			.then((user) => {
 				setUserObj(user);
 				console.log(user);
-			});
+			}).catch(err=> console.error(err));
 	}, [props.user.UserId]);
 
 	// useEffect(()=>{
