@@ -112,7 +112,9 @@ export function Home(props) {
 											style={{ width: 250 }}
 										/>
 									</div>
-									<h1>Hello {userObj.username}!</h1>
+									<h1 className="text-3xl overline ">
+										Hello {userObj.username}!
+									</h1>
 
 									{/* Right section on desktop */}
 									<div className="hidden lg:ml-4 lg:flex lg:items-center lg:py-5 lg:pr-0.5">
