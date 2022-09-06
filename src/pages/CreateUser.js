@@ -18,16 +18,6 @@ export default function CreateUser(props) {
         setEmail('')
         setImg_url('')
     }
-
-    const [user, setUser] = useState({
-        userId: '',
-        email: '',
-        password: '',
-        username: '',
-        bio: '',
-        img_url: '',
-        bio: '',
-    });
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -198,7 +188,7 @@ export default function CreateUser(props) {
                 </div>
             </form>
         </div>
-                )
+    )
 
 };
 

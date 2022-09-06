@@ -19,22 +19,21 @@ import CreateGroup from '../components/CreateGroup';
 import PostList from '../components/PostList';
 import { Image } from 'cloudinary-react';
 import CreatePost from '../components/CreatePost';
+import RandFriendPopOut from '../components/RandFriendPopOut';
 
 export function Home(props) {
-
 	// user state and hooks
 	console.log(props);
 	const [userObj, setUserObj] = useState({});
 
 	useEffect(() => {
+		console.log(props)
 		API.getOneUser(props.user.UserId)
 			.then((res) => res.json())
 			.then((user) => {
 				setUserObj(user);
 				console.log(user);
-			}).then(() => {
-				console.log(userObj);
-			})
+			}).catch(err=> console.error(err));
 	}, [props.user.UserId]);
 
 
@@ -141,28 +140,30 @@ export function Home(props) {
 													<Menu.Item>
 														<a
 															href={'/profile'}
-															className='block px-4 py-2 text-sm text-gray-700'
-															onClick={() => { }}
-														>Your Profile</a>
-
+															className="block px-4 py-2 text-sm text-gray-700"
+															onClick={() => {}}
+														>
+															Your Profile
+														</a>
 													</Menu.Item>
 													<Menu.Item>
 														<a
 															href={'#'}
-															className='block px-4 py-2 text-sm text-gray-700'
-															onClick={() => { }}
-														>Settings</a>
-
+															className="block px-4 py-2 text-sm text-gray-700"
+															onClick={() => {}}
+														>
+															Settings
+														</a>
 													</Menu.Item>
 													<Menu.Item>
 														<a
 															href={'#'}
-															className='block px-4 py-2 text-sm text-gray-700'
+															className="block px-4 py-2 text-sm text-gray-700"
 															onClick={props.handleLogout}
-														>Logout</a>
-
+														>
+															Logout
+														</a>
 													</Menu.Item>
-
 												</Menu.Items>
 											</Transition>
 										</Menu>
@@ -173,33 +174,42 @@ export function Home(props) {
 											{/* Left nav */}
 											<div className="hidden lg:col-span-2 lg:block">
 												<nav className="flex space-x-4">
-													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/home'}>Home</Link>
-													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/profile'}>Profile</Link>
-													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/friends'}>Friends</Link>
-													<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/groups'}>Groups</Link>
+													<Link
+														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+														to={'/home'}
+													>
+														Home
+													</Link>
+													<Link
+														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+														to={'/profile'}
+													>
+														Profile
+													</Link>
+													<Link
+														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+														to={'/friends'}
+													>
+														Friends
+													</Link>
+													<Link
+														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+														to={'/groups'}
+													>
+														Groups
+													</Link>
 												</nav>
 											</div>
 											<div className="px-12 lg:px-0">
-												{/* Search */}
+												{/* Random Friend pop out button */}
 												<div className="mx-auto w-full max-w-xs lg:max-w-md">
-													<label htmlFor="search" className="sr-only">
-														Search
-													</label>
-													<div className="relative text-white focus-within:text-gray-600">
-														<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-															<MagnifyingGlassIcon
-																className="h-5 w-5"
-																aria-hidden="true"
-															/>
-														</div>
-														<input
-															id="search"
-															className="block w-full rounded-md border border-transparent bg-lime-200 bg-opacity-20 py-2 pl-10 pr-3 leading-5 text-white placeholder-white focus:border-transparent focus:bg-opacity-100 focus:text-gray-900 focus:placeholder-gray-500 focus:outline-none focus:ring-0 sm:text-sm"
-															placeholder="Search"
-															type="search"
-															name="search"
-														/>
-													</div>
+													<button
+														type="button"
+														className="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md border border-transparent hover:bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:flex-1"
+														onClick={<RandFriendPopOut />}
+													>
+														Random Friend
+													</button>
 												</div>
 											</div>
 										</div>
@@ -274,10 +284,30 @@ export function Home(props) {
 														</div>
 													</div>
 													<div className="mt-3 space-y-1 px-2">
-														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/home'}>Home</Link>
-														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/profile'}>Profile</Link>
-														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/friends'}>Friends</Link>
-														<Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10'to={'/groups'}>Groups</Link>
+														<Link
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															to={'/home'}
+														>
+															Home
+														</Link>
+														<Link
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															to={'/profile'}
+														>
+															Profile
+														</Link>
+														<Link
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															to={'/friends'}
+														>
+															Friends
+														</Link>
+														<Link
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															to={'/groups'}
+														>
+															Groups
+														</Link>
 													</div>
 												</div>
 												<div className="pt-4 pb-2">
@@ -343,21 +373,30 @@ export function Home(props) {
 				<main className="-mt-24 pb-8 bg-gradient-to-r from-zinc-800 to-zinc-700">
 					<div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 						<h1 className="sr-only">Profile</h1>
+						{<CreatePost user={userObj} />}
 						{/* Main 3 column grid */}
 						<div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 overflow-auto ">
 							{/* Left column */}
 							<PostList />
 
 							{/* Right column */}
-							<div className="grid grid-cols-1 gap-4">
-								{userObj.friends ? <FriendsList friends={userObj.friends} /> : <></>}
-								{userObj.friends ? <CreateGroup user={{ ...userObj }} /> : <></>}
-								{<CreatePost user={userObj} />}
+							<div className="grid grid-cols-1 gap-4 m-2">
+								{userObj.friends ? (
+									<FriendsList friends={userObj.friends} />
+								) : (
+									<></>
+								)}
+								{userObj.friends ? (
+									<CreateGroup user={{ ...userObj }} />
+								) : (
+									<></>
+								)}
 							</div>
 						</div>
 					</div>
 				</main>
 			</div>
+			<RandFriendPopOut />
 		</>
 	);
 }
