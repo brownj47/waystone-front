@@ -245,16 +245,17 @@ const App = () => {
 
 			<Routes>
 				<Route index element={<Login />} />
+
 				{/* <ProtectedRouteTest user={user}>
-					<Home/>
+					<Home/> https://brownj47.github.io/waystone-front
 				</ProtectedRouteTest> */}
 				<Route element={<ProtectedRoute user={user} />} >
-					<Route path="/home" element={<Home user={user}handleLogout={handleLogout} />} />
-					<Route path="/groups" element={<GroupPage user={user} handleLogout={handleLogout}/>} />
+					<Route path="/waystone-front/home" element={<Home user={user}handleLogout={handleLogout} />} />
+					<Route path="/waystone-front/groups" element={<GroupPage user={user} handleLogout={handleLogout}/>} />
 				</Route>
-				<Route path="/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
-				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
-				<Route path='*' element={<h1>404 Page Not Found</h1>} />
+				<Route path="/waystone-front/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
+				<Route path="/waystone-front/login" element={<Login handleLogin={handleLogin} />} />
+				<Route path='/waystone-front/*' element={<h1>404 Page Not Found</h1>} />
 			</Routes>
 
 			
