@@ -33,7 +33,7 @@ const CreateGroup = (props) => {
 			<form onSubmit={handleSubmit}>
 				<label
 					htmlFor="group-name"
-					className="block text-sm font-medium text-lime-200"
+					className="block text-xl font-medium text-lime-200"
 				>
 					Group Name:
 				</label>

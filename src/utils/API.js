@@ -48,7 +48,7 @@ const API = {
 	},
 
 	//returns random user object
-	randomFriend: () => {
+	randomUser: () => {
 		return fetch(`${URL_PREFIX}/users/d20`)
 	},
 
@@ -88,12 +88,12 @@ const API = {
 	// path for sending a friend request
 	// UserId references the user is sending the request
 	// FriendId references the user the request is being sent to
-	requestFriend: (UserId, FriendId) => {
+	requestFriend: (UserId, RecipientId) => {
 		return fetch(`${URL_PREFIX}/users/requests`, {
 			method: 'POST',
 			body: JSON.stringify({
 				UserId,
-				FriendId
+				RecipientId
 			}),
 			headers: {
 				'Content-Type': 'application/json'
