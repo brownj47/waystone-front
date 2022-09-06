@@ -103,15 +103,11 @@ const App = () => {
 		});
 	};
 
-	const handleUserCreate = async (email, password, username, bio, img_url) => {
+	const handleUserCreate = async (username, email, password, bio, img_url) => {
 		setUser((user) => {
 			// https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
-				email,
-				password,
-				username,
-				bio,
-				img_url,
+				username, email, password, bio, img_url
 			};
 			const foundUser = {};
 			console.log(modifiedValue);
