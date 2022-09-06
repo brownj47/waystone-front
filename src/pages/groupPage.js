@@ -20,7 +20,7 @@ import PostList from '../components/PostList';
 import { Image } from 'cloudinary-react';
 import CreatePost from '../components/CreatePost';
 
-export function Home(props) {
+export default function GroupPage(props) {
 
 	// user state and hooks
 	console.log(props);
@@ -346,9 +346,9 @@ export function Home(props) {
 
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4">
-								{userObj.friends ? <FriendsList friends={userObj.friends} /> : <></>}
+								{/* {userObj.friends ? <FriendsList friends={userObj.friends} /> : <></>} */}
 								{userObj.friends ? <CreateGroup user={{ ...userObj }} /> : <></>}
-								{<CreatePost user={userObj} />}
+								{/* {<CreatePost user={userObj} />} */}
 							</div>
 						</div>
 					</div>
