@@ -5,6 +5,7 @@ import { Route, Routes, Link, useNavigate, Navigate, Outlet } from 'react-router
 import { Home } from './pages/Home';
 import CreateUser from './pages/CreateUser';
 import GroupPage from './pages/groupPage';
+import Profile from './pages/profile';
 import Login from './pages/login';
 import API from './utils/API';
 import { data } from 'autoprefixer';
@@ -179,6 +180,39 @@ const App = () => {
 		})
 	}
 
+	const handleEditUser = async (email, password, username, bio, img_url)=>{
+		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
+			const modifiedValue = {
+				email,
+				password,
+				username, 
+				bio,
+				img_url
+			}
+			console.log(modifiedValue);
+			fetch(`${URL_PREFIX}api/users`, {
+				method: 'PUT',
+				body: JSON.stringify(modifiedValue),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(res => {
+				if (!res.ok) {
+					setUser({ username: "", email: "" });
+					setToken("")
+					return;
+				}
+				return res.json()
+			}).then((data) => {
+				console.log(data)
+				setToken(data.token)
+				localStorage.setItem('token', JSON.stringify(data.token))
+				navigate('/home')
+			})
+			return modifiedValue;
+		})
+	}
+
 	const checkToken = (tokenToCheck) => {
 		return (fetch(`${URL_PREFIX}checkToken`, {
 			headers: {
@@ -246,6 +280,7 @@ const App = () => {
 					<Route path="/home" element={<Home user={user}handleLogout={handleLogout} />} />
 					<Route path="/groups" element={<GroupPage user={user} handleLogout={handleLogout}/>} />
 				</Route>
+				<Route path="/profile" element={<Profile user={user} handleLogout={handleLogout} handleEditUser={handleEditUser}/>} />
 				<Route path="/CreateUser" element={<CreateUser  handleUserCreate={handleUserCreate}/>} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
 				<Route path='*' element={<h1>404 Page Not Found</h1>} />
