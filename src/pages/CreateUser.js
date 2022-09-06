@@ -200,7 +200,7 @@ export default function CreateUser(props) {
 							</div>
 							<div className="pt-5">
 								<div className="flex justify-end">
-									<Link to={'/login'}>
+									<Link to={'/waystone-front/login'}>
 										<button
 											type="button"
 											className="rounded-md border border-gray-300 bg-zinc-500 py-2 px-4 text-sm font-medium text-lime-400 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mb-2"

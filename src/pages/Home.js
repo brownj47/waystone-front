@@ -198,25 +198,25 @@ export function Home(props) {
 												<nav className="flex space-x-4">
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/home'}
+														to={'/waystone-front/home'}
 													>
 														Home
 													</Link>
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/profile'}
+														to={'/waystone-front/profile'}
 													>
 														Profile
 													</Link>
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/friends'}
+														to={'/waystone-front/friends'}
 													>
 														Friends
 													</Link>
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/groups'}
+														to={'/waystone-front/groups'}
 													>
 														Groups
 													</Link>
