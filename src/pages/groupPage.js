@@ -139,10 +139,10 @@ export default function GroupPage(props) {
                                             {/* Left nav */}
                                             <div className="hidden lg:col-span-2 lg:block">
                                                 <nav className="flex space-x-4">
-                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/home'}>Home</Link>
-                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/profile'}>Profile</Link>
-                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/friends'}>Friends</Link>
-                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/groups'}>Groups</Link>
+                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/home'}>Home</Link>
+                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/profile'}>Profile</Link>
+                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/friends'}>Friends</Link>
+                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/groups'}>Groups</Link>
                                                 </nav>
                                             </div>
                                             <div className="px-12 lg:px-0">
@@ -240,10 +240,10 @@ export default function GroupPage(props) {
                                                         </div>
                                                     </div>
                                                     <div className="mt-3 space-y-1 px-2">
-                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/home'}>Home</Link>
-                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/profile'}>Profile</Link>
-                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/friends'}>Friends</Link>
-                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/groups'}>Groups</Link>
+                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/home'}>Home</Link>
+                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/profile'}>Profile</Link>
+                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/friends'}>Friends</Link>
+                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/groups'}>Groups</Link>
                                                     </div>
                                                 </div>
                                                 <div className="pt-4 pb-2">
