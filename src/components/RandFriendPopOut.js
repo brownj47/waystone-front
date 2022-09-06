@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
@@ -11,8 +11,30 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
-export default function RandFriendPopOut() {
+export default function RandFriendPopOut(props) {
 	const [open, setOpen] = useState(true);
+
+	const userObjFriends = props.user.friends
+	const userObjId = props.user.id
+	console.log(userObjFriends)
+	const [randUserObj, setRandUserObj] = useState({});
+
+	useEffect(() => {
+		API.randomUser()
+			.then((res) => res.json())
+			.then((user) => {
+				console.log(`friends array`)
+				console.log(userObjFriends)
+				console.log(`userObj id : ${userObjId}`)
+				console.log(`rand user id : ${user.id}`)
+				if ( userObjFriends.filter(friend => friend.id !== user.id) && userObjId!=user.id ) {
+					setRandUserObj(user);
+					console.log("rand User")
+				} else {
+					console.log("not rand user")
+				}
+			});
+	}, [userObjFriends]);
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -70,14 +92,14 @@ export default function RandFriendPopOut() {
 																<div className="flex items-center">
 																	<h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
 																		{/* RandomUSer Username */}
-																		Ashley Porter
+																		{randUserObj.username}
 																	</h3>
 																	<span className="ml-2.5 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-green-400">
 																		<span className="sr-only">Online</span>
 																	</span>
 																</div>
 																<p className="text-sm text-gray-700">
-																	@ashleyporter
+																	{randUserObj.username}
 																</p>
 															</div>
 															<div className="mt-5 flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3">
@@ -150,13 +172,7 @@ export default function RandFriendPopOut() {
 														<h1 className="font-bold text-lg">Bio:</h1>
 														<p>
 															{/* insert SelectedRandomUser.bio */}
-															Bio goes here for the random user Bio goes here
-															for the random user Bio goes here for the random
-															user Bio goes here for the random user Bio goes
-															here for the random user Bio goes here for the
-															random user Bio goes here for the random user Bio
-															goes here for the random user Bio goes here for
-															the random user
+															{randUserObj.bio}
 														</p>
 													</div>
 													<div>
