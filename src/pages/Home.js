@@ -20,6 +20,7 @@ import {
 import FriendsList from '../components/FriendsList';
 import CreateGroup from '../components/CreateGroup';
 import PostList from '../components/PostList';
+import FriendRequestList from '../components/FriendRequstList';
 import { Image } from 'cloudinary-react';
 import CreatePost from '../components/CreatePost';
 import RandFriendPopOut from '../components/RandFriendPopOut';
@@ -112,9 +113,7 @@ export function Home(props) {
 											style={{ width: 250 }}
 										/>
 									</div>
-									<h1 className="text-3xl overline ">
-										Hello {userObj.username}!
-									</h1>
+									<h1>Hello {userObj.username}!</h1>
 
 									{/* Right section on desktop */}
 									<div className="hidden lg:ml-4 lg:flex lg:items-center lg:py-5 lg:pr-0.5">
@@ -296,25 +295,25 @@ export function Home(props) {
 													</div>
 													<div className="mt-3 space-y-1 px-2">
 														<Link
-															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
 															to={'/home'}
 														>
 															Home
 														</Link>
 														<Link
-															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
 															to={'/profile'}
 														>
 															Profile
 														</Link>
 														<Link
-															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
 															to={'/friends'}
 														>
 															Friends
 														</Link>
 														<Link
-															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
+															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
 															to={'/groups'}
 														>
 															Groups
@@ -402,6 +401,7 @@ export function Home(props) {
 								) : (
 									<></>
 								)}
+								<FriendRequestList />
 							</div>
 						</div>
 					</div>
