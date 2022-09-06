@@ -1,7 +1,7 @@
 {
   "name": "waystone-front",
   "version": "0.1.0",
-  "homepage": "https://brownj47.github.io/waystone-front",
+  "homepage": "https://jb-waystone-fornt.herokuapp.com/",
 
   "private": true,
   "dependencies": {
