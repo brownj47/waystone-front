@@ -18,6 +18,7 @@ export default function CreatePost(props) {
 			post.title,
 			post.post_body,
 			post.username,
+			post.userId,
 			post.GroupId
 		);
 	};
