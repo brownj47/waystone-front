@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/waystone-front/static/css/main.f0bc5dc3.css",
-    "main.js": "/waystone-front/static/js/main.b2e57ad3.js",
+    "main.js": "/waystone-front/static/js/main.6f17f45f.js",
     "static/js/787.1d9ce844.chunk.js": "/waystone-front/static/js/787.1d9ce844.chunk.js",
     "static/media/logo.svg": "/waystone-front/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/waystone-front/index.html",
     "static/media/index.cjs": "/waystone-front/static/media/index.cd351d7c31d0d3fccf96.cjs",
     "main.f0bc5dc3.css.map": "/waystone-front/static/css/main.f0bc5dc3.css.map",
-    "main.b2e57ad3.js.map": "/waystone-front/static/js/main.b2e57ad3.js.map",
+    "main.6f17f45f.js.map": "/waystone-front/static/js/main.6f17f45f.js.map",
     "787.1d9ce844.chunk.js.map": "/waystone-front/static/js/787.1d9ce844.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f0bc5dc3.css",
-    "static/js/main.b2e57ad3.js"
+    "static/js/main.6f17f45f.js"
   ]
 }
