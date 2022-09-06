@@ -43,7 +43,7 @@ const navigation = {
 };
 
 const ProtectedRoute = ({ user }) => {
-	return user ? <Outlet /> : <Navigate to={'/login'} />;
+	return user ? <Outlet /> : <Navigate to={'/waystone-front/login'} />;
 };
 const App = () => {
 	const navigate = useNavigate();
@@ -96,7 +96,7 @@ const App = () => {
 					foundUser.UserId = data.user._id;
 					setToken(data.token);
 					localStorage.setItem('token', JSON.stringify(data.token));
-					navigate('/home');
+					navigate('/waystone-front/home');
 				});
 			return foundUser;
 		});
@@ -138,7 +138,7 @@ const App = () => {
 					foundUser.UserId = data.user._id;
 					setToken(data.token);
 					localStorage.setItem('token', JSON.stringify(data.token));
-					navigate('/home');
+					navigate('/waystone-front/home');
 				});
 			return foundUser;
 		});
@@ -160,7 +160,7 @@ const App = () => {
 					username: '',
 					img_url: '',
 				});
-				navigate(`/login`);
+				navigate(`/waystone-front/login`);
 			} else {
 				console.log('valid token');
 				res
@@ -177,7 +177,7 @@ const App = () => {
 							UserId: user.id,
 							// ...user
 						});
-						navigate('/home');
+						navigate('/waystone-front/home');
 					});
 			}
 		});
@@ -189,7 +189,7 @@ const App = () => {
 			email: '',
 			password: '',
 		});
-		navigate('/login');
+		navigate('/waystone-front/login');
 	};
 
 	useEffect(() => {
@@ -202,25 +202,29 @@ const App = () => {
 		<>
 			<Routes>
 				<Route index element={<Login />} />
+
 				{/* <ProtectedRouteTest user={user}>
-					<Home/>
+					<Home/> https://brownj47.github.io/waystone-front
 				</ProtectedRouteTest> */}
 				<Route element={<ProtectedRoute user={user} />}>
 					<Route
-						path="/home"
+						path="/waystone-front/home"
 						element={<Home user={user} handleLogout={handleLogout} />}
 					/>
 					<Route
-						path="/groups"
+						path="/waystone-front/groups"
 						element={<GroupPage user={user} handleLogout={handleLogout} />}
 					/>
 				</Route>
 				<Route
-					path="/CreateUser"
+					path="/waystone-front/CreateUser"
 					element={<CreateUser handleUserCreate={handleUserCreate} />}
 				/>
-				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
-				<Route path="*" element={<h1>404 Page Not Found</h1>} />
+				<Route
+					path="/waystone-front/login"
+					element={<Login handleLogin={handleLogin} />}
+				/>
+				<Route path="/waystone-front/*" element={<h1>404 Page Not Found</h1>} />
 			</Routes>
 
 			<footer className="bg-zinc-800 h-96 p-5">
