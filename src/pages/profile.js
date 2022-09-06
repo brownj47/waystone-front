@@ -9,11 +9,12 @@ let logoUrl = '';
 
 export default function EditUser(props) {
 
-    console.log(props);
+    // console.log(props);
 	const [userObj, setUserObj] = useState({});
 
 
     useEffect(() => {
+        console.log(props)
 		API.getOneUser(props.user.UserId)
 			.then((res) => res.json())
 			.then((user) => {
@@ -26,7 +27,8 @@ export default function EditUser(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.handleEditUser(email, password, username, bio, img_url);
+       
+        props.handleEditUser(userObj.UserId, email, password, username, bio, img_url);
         setBio('')
         setUsername('')
         setPassword('')
@@ -35,7 +37,7 @@ export default function EditUser(props) {
     }
 
     const [user, setUser] = useState({
-        userId: '',
+        UserId: '',
         email: '',
         password: '',
         username: '',
@@ -49,6 +51,7 @@ export default function EditUser(props) {
     const [bio, setBio] = useState('');
     const [img_url, setImg_url] = useState('');
     const [token, setToken] = useState('');
+    const [UserId, setUserId] = useState('');
 
     const [imageSelected, setImageSelected] = useState('');
 
