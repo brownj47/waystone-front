@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import cloudinary from 'cloudinary-core';
 import { Image } from 'cloudinary-react'
+import API from '../utils/API';
 
 let logoUrl = '';
 
@@ -10,11 +11,12 @@ export default function CreateUser(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.handleUserCreate(email, password, username, bio);
+        props.handleUserCreate(email, password, username, bio, img_url);
         setBio('')
         setUsername('')
         setPassword('')
         setEmail('')
+        setImg_url('')
     }
 
     const [user, setUser] = useState({
@@ -35,7 +37,11 @@ export default function CreateUser(props) {
 
     const [imageSelected, setImageSelected] = useState('');
 
+
+
     const uploadImage = () => {
+
+        
 
         const formData = new FormData()
         formData.append('file', imageSelected)
@@ -43,9 +49,10 @@ export default function CreateUser(props) {
 
         Axios.post('https://api.cloudinary.com/v1_1/diuo4ygwd/image/upload', formData).then(res => {
             console.log(res)
-            console.log(res.data.secure_url)
+            console.log("res.data.secure_url", res.data.secure_url)
             setImg_url(res.data.secure_url)
-            console.log(img_url)
+            console.log("img url", img_url)
+
         })
     };
 

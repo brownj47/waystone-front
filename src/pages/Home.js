@@ -32,8 +32,12 @@ export function Home(props) {
 			.then((user) => {
 				setUserObj(user);
 				console.log(user);
-			});
+			}).then(() => {
+				console.log(userObj);
+			})
 	}, [props.user.UserId]);
+
+
 
 	// useEffect(()=>{
 	// 	API.getOneUser(UserId).then(res=>res.json()).then(user=>{
