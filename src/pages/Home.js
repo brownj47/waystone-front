@@ -312,25 +312,25 @@ export function Home(props) {
 													<div className="mt-3 space-y-1 px-2">
 														<Link
 															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
-															to={'/home'}
+															to={'/waystone-front/home'}
 														>
 															Home
 														</Link>
 														<Link
 															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
-															to={'/profile'}
+															to={'/waystone-front/waystone-front/profile'}
 														>
 															Profile
 														</Link>
 														<Link
 															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
-															to={'/friends'}
+															to={'/waystone-front/friends'}
 														>
 															Friends
 														</Link>
 														<Link
 															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
-															to={'/groups'}
+															to={'/waystone-front/groups'}
 														>
 															Groups
 														</Link>
