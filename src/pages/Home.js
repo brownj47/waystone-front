@@ -200,12 +200,7 @@ export function Home(props) {
 													>
 														Profile
 													</Link>
-													<Link
-														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/waystone-front/friends'}
-													>
-														Friends
-													</Link>
+					
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
 														to={'/waystone-front/groups'}
@@ -313,12 +308,7 @@ export function Home(props) {
 														>
 															Profile
 														</Link>
-														<Link
-															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
-															to={'/waystone-front/friends'}
-														>
-															Friends
-														</Link>
+												
 														<Link
 															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
 															to={'/waystone-front/groups'}
