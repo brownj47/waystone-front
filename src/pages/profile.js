@@ -53,10 +53,10 @@ export default function Profile(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
        
-        props.handleEditUser(userObj.id, username, email, password, bio, img_url);
+        props.handleEditUser(userObj.id, username, email, bio, img_url);
         setUsername('')
         setEmail('')
-        setPassword('')
+        
         setBio('')
         setImg_url('')
     }
@@ -72,7 +72,7 @@ export default function Profile(props) {
     });
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    
     const [bio, setBio] = useState('');
     const [img_url, setImg_url] = useState('');
 
@@ -132,7 +132,7 @@ export default function Profile(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                            {/* <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                 <label htmlFor="password" className="block text-sm font-medium text-lime-400 sm:mt-px sm:pt-2">
                                     password
                                 </label>
@@ -152,7 +152,7 @@ export default function Profile(props) {
                                         />
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                 <label htmlFor="email" className="block text-sm font-medium text-lime-400 sm:mt-px sm:pt-2">
                                 Current Mail: {userObj.email} 

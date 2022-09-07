@@ -89,7 +89,7 @@ export default function CreateUser(props) {
 									htmlFor="password"
 									className="block text-lg font-medium text-lime-400 sm:mt-px sm:pt-2"
 								>
-									password
+									Password: This will be your permanent password, choose wisely...
 								</label>
 								<div className="mt-1 sm:col-span-2 sm:mt-0">
 									<div className="flex max-w-lg rounded-md shadow-sm">
