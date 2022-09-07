@@ -61,9 +61,8 @@ const CreateGroup = (props) => {
 			<div>
 				{props.user.friends.map(function (friend) {
 					return (
-						<>
+						<div key={friend._id}>
 							<button
-								key={friend._id}
 								onClick={(e) => {
 									setMembersToAdd([...membersToAdd, friend._id]);
 									e.target.showComponent = false;
@@ -73,7 +72,7 @@ const CreateGroup = (props) => {
 							</button>
 
 							<br />
-						</>
+						</div>
 					);
 				})}
 			</div>
