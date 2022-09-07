@@ -310,7 +310,7 @@ export default function GroupPage(props) {
                                     })}
                                 </ul>
                             </nav>
-                            <PostList />
+                            <PostList user={userObj}/>
 
                             {/* Right column */}
                             <div className="grid grid-cols-1 gap-4">

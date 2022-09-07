@@ -103,13 +103,13 @@ const API = {
 
 	// path for accepting a friend request
 	// UserId references the user who received the request
-	// FriendId references the user the who sent the request
-	acceptFriend: (UserId, FriendId) => {
+	// SenderId references the user the who sent the request
+	acceptFriend: (UserId, SenderId) => {
 		return fetch(`${URL_PREFIX}/users/requests`, {
 			method: 'PUT',
 			body: JSON.stringify({
 				UserId,
-				FriendId
+				SenderId
 			}),
 			headers: {
 				'Content-Type': 'application/json'
@@ -119,14 +119,14 @@ const API = {
 
 	// path for denying a friend request
 	// UserId references the user who received the request
-	// FriendId references the user the who sent the request
-	// Deleting will remove the FriendId from the UserId's inbox, but the UserId will persist in FriendId's outbox to prevent resend
-	denyFriend: (UserId, FriendId) => {
+	// SenderId references the user the who sent the request
+	// Deleting will remove the SenderId from the UserId's inbox, but the UserId will persist in SenderId's outbox to prevent resend
+	denyFriend: (UserId, SenderId) => {
 		return fetch(`${URL_PREFIX}/users/requests`, {
 			method: 'DELETE',
 			body: JSON.stringify({
 				UserId,
-				FriendId
+				SenderId
 			}),
 			headers: {
 				'Content-Type': 'application/json'
