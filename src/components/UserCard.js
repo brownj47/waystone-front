@@ -15,14 +15,7 @@ export default function UserCard(person) {
 						{'@' + person.friend.username}
 					</p>
 				</div>
-				<div>
-					<a
-						href={person.friend.href}
-						className="inline-flex items-center rounded-full border border-gray-300 bg-white px-2.5 py-0.5 text-sm font-medium leading-5 text-gray-700 shadow-sm hover:bg-lime-200"
-					>
-						View
-					</a>
-				</div>
+				
 			</div>
 		</li>
 	);
