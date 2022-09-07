@@ -58,7 +58,8 @@ const CreateGroup = (props) => {
 					</button>
 				</div>
 			</form>
-			<div>
+			<div className="border rounded p-2">
+				<h1 className="text-lime-400 text-xl">Add to Group:</h1>
 				{props.user.friends.map(function (friend) {
 					return (
 						<div key={friend._id}>
@@ -67,8 +68,9 @@ const CreateGroup = (props) => {
 									setMembersToAdd([...membersToAdd, friend._id]);
 									e.target.showComponent = false;
 								}}
+								className="text-lime-200 text-lg"
 							>
-								{friend.username}
+								{friend.username} ✅
 							</button>
 
 							<br />
