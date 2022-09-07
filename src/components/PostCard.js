@@ -37,8 +37,8 @@ function PostCard(post) {
 				type="text"
 				name="email"
 				id="comment"
-				className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-900 shadow-lg bg-zinc-100 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-			/>
+				className="block w-full min-w-0 flex-1 rounded-none py-2 rounded-r-md border-gray-900 shadow-lg bg-zinc-100 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+			placeholder='Write a comment...'/>
 			<button onClick={()=>postComment(comment_body, UserId, ParentId, PostId, username)} className="inline-flex items-center rounded-md border border-transparent bg-lime-400 px-4 py-2 text-base font-medium text-zinc shadow-sm hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-00 focus:ring-offset-2">Comment</button>
 			<h1 className="font-bold text-md ">Comments:</h1>
 			{post && post.comments && post.comments.length? (
