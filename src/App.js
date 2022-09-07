@@ -196,14 +196,14 @@ const App = () => {
 	}, []);
 
 	// edit profile page
-	const handleEditUser = async (UserId, username, email, password, bio, img_url)=>{
+	const handleEditUser = async (UserId, username, email, bio, img_url)=>{
 		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
-				UserId, username, email, password, bio, img_url
+				UserId, username, email, bio, img_url
 			}
 			const updatedUser = {};
 			console.log(modifiedValue);
-			API.updateUser(UserId, username, email, password, bio, img_url) 
+			API.updateUser(UserId, username, email, bio, img_url) 
 			
 			.then(res => {
 				console.log('==============================================')
