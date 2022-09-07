@@ -402,7 +402,7 @@ export function Home(props) {
 						{/* Main 3 column grid */}
 						<div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 overflow-auto ">
 							{/* Left column */}
-							<PostList />
+							<PostList user={userObj}/>
 
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4 m-2">

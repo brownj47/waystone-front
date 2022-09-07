@@ -267,15 +267,19 @@ const API = {
 	},
 
 	// creates a new comment where ParentId=PostId
-	createNewComment: (comment_body, UserId, PostId, ParentId) => {
+	createNewComment: (comment_body, UserId, ParentId, PostId, username) => {
 		return fetch(`${URL_PREFIX}/comments`, {
 			method: 'POST',
 			body: JSON.stringify({
-				comment_body,
-				UserId,
-				PostId,
-				ParentId
-			})
+				comment_body: comment_body,
+				UserId: UserId,
+				ParentId: ParentId,
+				PostId: PostId,
+				username: username
+			}),
+			headers: {
+				'Content-Type':'application/json'
+			}
 		})
 	},
 
@@ -291,15 +295,20 @@ const API = {
 	},
 
 	// posts a reply on a comment where ParentId is the CommentId being replied to
-	commentReply: (comment_body, UserId, PostId, ParentId) => {
+	commentReply: (comment_body, UserId, PostId, ParentId, username) => {
+		console.log(comment_body, UserId, PostId, ParentId, username)
 		return fetch(`${URL_PREFIX}/comments/reply`, {
 			method: 'POST',
 			body: JSON.stringify({
 				comment_body,
 				UserId,
 				PostId,
-				ParentId
-			})
+				ParentId,
+				username
+			}),
+			headers: {
+				'Content-Type':'application/json'
+			}
 		})
 	},
 
