@@ -1,5 +1,6 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/20/solid';
+import { useState } from 'react';
+import API from '../utils/API';
 
 const people = [
 	{
@@ -23,7 +24,7 @@ const people = [
 	// More people...
 ];
 
-export default function Example() {
+export default function FriendRequestList(props) {
 	return (
 		<>
 			<h1 className="text-lime-200 text-2xl">Friend Requests</h1>
