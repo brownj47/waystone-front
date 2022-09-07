@@ -20,24 +20,24 @@ function PostCard(comment) {
 			<h2 className="indent-4">{comment.comment.comment_body}</h2>
 			<h2 className="font-medium p-2 ">{comment.comment.createdAt}</h2>
 
-			<input
-				onChange={(e) => setReply(e.target.value)}
-				value={reply}
-				type="text"
-				name="email"
-				id="comment"
-				className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-900 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-			/>
-			<button onClick={()=>postReply(reply, UserId, ParentId, PostId, username)}>Reply</button>
-			<h1 className="font-bold text-md ">replies:</h1>
+				<input
+					onChange={(e) => setReply(e.target.value)}
+					value={reply}
+					type="text"
+					name="email"
+					id="comment"
+					className="block w-full min-w-0 py-2 flex-1 rounded-none rounded-r-md border-gray-900 shadow-lg bg-zinc-100 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+					placeholder='Write a reply...'/>
+				<button onClick={()=>postReply(reply, UserId, ParentId, PostId, username)} className="inline-flex items-center rounded-md border border-transparent bg-lime-400 px-4 py-2 text-base font-medium text-zinc shadow-sm hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-800 focus:ring-offset-2">Reply</button>
+				<h1 className="font-bold text-md ">Replies:</h1>
 
-			{comment.comment && comment.comment.replies.length? (
-				comment.comment.replies.map((reply) => (
-					<ReplyCard {...reply} key={reply._id} user={comment.user} reply={reply}/>
-				))
-			) : (
-				<></>
-			)}
+				{comment.comment && comment.comment.replies.length? (
+					comment.comment.replies.map((reply) => (
+						<ReplyCard {...reply} key={reply._id} user={comment.user} reply={reply}/>
+					))
+				) : (
+					<></>
+				)}
 
 		</div>
 	);
