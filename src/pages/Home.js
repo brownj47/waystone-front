@@ -68,37 +68,37 @@ export function Home(props) {
 	};
 
 	const sendFriendRequest = (UserId, RecipientId) => {
-		console.log(UserId)
-		console.log(RecipientId)
+		console.log(UserId);
+		console.log(RecipientId);
 		API.requestFriend(UserId, RecipientId)
 			.then((res) => res.json())
 			.then(() => {
-				findNewRandUser()
-				console.log("REQUEST SENT!");
+				findNewRandUser();
+				console.log('REQUEST SENT!');
 			})
 			.catch((err) => console.error(err));
 	};
 
 	const acceptFriendRequest = (UserId, SenderId) => {
-		console.log(UserId)
-		console.log(SenderId)
+		console.log(UserId);
+		console.log(SenderId);
 		API.acceptFriend(UserId, SenderId)
 			.then((res) => res.json())
 			.then(() => {
-				findNewRandUser()
-				console.log("ACCEPTED!");
+				findNewRandUser();
+				console.log('ACCEPTED!');
 			})
 			.catch((err) => console.error(err));
 	};
 
 	const denyFriendRequest = (UserId, SenderId) => {
-		console.log(UserId)
-		console.log(SenderId)
+		console.log(UserId);
+		console.log(SenderId);
 		API.denyFriend(UserId, SenderId)
 			.then((res) => res.json())
 			.then(() => {
-				findNewRandUser()
-				console.log("DENIED!");
+				findNewRandUser();
+				console.log('DENIED!');
 			})
 			.catch((err) => console.error(err));
 	};
@@ -117,7 +117,7 @@ export function Home(props) {
 									{/* Logo */}
 									<div className="absolute left-0 flex-shrink-0 py-5 lg:static">
 										<img
-											className="mx-auto h-12 w-auto bg-lime-300 rounded-full"
+											className="m-4 h-12 w-auto bg-lime-300 rounded-full"
 											// src="https://tailwindui.com/img/logos/workflow-mark.svg?color=lime&4hade=600"
 
 											src="https://i.ibb.co/zmHz8jh/waystone.png"
@@ -126,10 +126,13 @@ export function Home(props) {
 										<Image
 											cloudName="diuo4ygwd"
 											publicId={userObj.img_url}
-											style={{ width: 250 }}
+											// style={{ width: 200 }}
+											className="rounded-full w-auto h-60"
 										/>
 									</div>
-									<h1>Hello {userObj.username}!</h1>
+									<h1 className="text-3xl font-semibold">
+										Hello {userObj.username}!
+									</h1>
 
 									{/* Right section on desktop */}
 									<div className="hidden lg:ml-4 lg:flex lg:items-center lg:py-5 lg:pr-0.5">
@@ -200,7 +203,7 @@ export function Home(props) {
 													>
 														Profile
 													</Link>
-					
+
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
 														to={'/waystone-front/groups'}
@@ -308,7 +311,7 @@ export function Home(props) {
 														>
 															Profile
 														</Link>
-												
+
 														<Link
 															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
 															to={'/waystone-front/groups'}
@@ -366,7 +369,7 @@ export function Home(props) {
 						{/* Main 3 column grid */}
 						<div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 overflow-auto ">
 							{/* Left column */}
-							<PostList user={userObj}/>
+							<PostList user={userObj} />
 
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4 m-2">
@@ -452,21 +455,26 @@ export function Home(props) {
 																		</span>
 																	</div>
 																	<p className="text-sm text-gray-700">
-																	{randUserObj.username}
+																		{randUserObj.username}
 																	</p>
 																</div>
 																<div className="mt-5 flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3">
 																	<button
 																		type="button"
 																		className="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md border border-transparent hover:bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:flex-1"
-																		onClick={()=> findNewRandUser()}
+																		onClick={() => findNewRandUser()}
 																	>
 																		Skip
 																	</button>
 																	<button
 																		type="button"
 																		className="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:flex-1"
-																		onClick={()=> sendFriendRequest(userObj.id, randUserObj.id)}
+																		onClick={() =>
+																			sendFriendRequest(
+																				userObj.id,
+																				randUserObj.id
+																			)
+																		}
 																	>
 																		Request Friend
 																	</button>
@@ -532,29 +540,36 @@ export function Home(props) {
 														</div>
 														<div>
 															{/* insert random user post here */}
-															{randUserObj.posts && randUserObj.posts.length?
-															(<div className="grid grid-cols-1 gap-4 lg:col-span-2 overflow-auto">
-																<section aria-labelledby="quick-links-title">
-																	<div className="bg-white w-full  rounded-lg">
-																		<ul role="list" className="divide-y divide-lime-400">
-																			{randUserObj.posts.map((post) => (
-																				<PostCard {...post} user={userObj} key={post._id} />
-																			))}
-																		</ul>
-																		<p>test</p>
-																	</div>
-																</section>
-															</div>)
-															:
-															(<div className="grid grid-cols-1 gap-4 lg:col-span-2 overflow-auto">
-															 	{/* POST PANEL */}
-																<section aria-labelledby="quick-links-title">
-																	<div className="bg-white w-full  rounded-lg">
-																		<h1>This user has no posts.</h1>
-																	</div>
-																</section>
-															</div>)
-															}
+															{randUserObj.posts && randUserObj.posts.length ? (
+																<div className="grid grid-cols-1 gap-4 lg:col-span-2 overflow-auto">
+																	<section aria-labelledby="quick-links-title">
+																		<div className="bg-white w-full  rounded-lg">
+																			<ul
+																				role="list"
+																				className="divide-y divide-lime-400"
+																			>
+																				{randUserObj.posts.map((post) => (
+																					<PostCard
+																						{...post}
+																						user={userObj}
+																						key={post._id}
+																					/>
+																				))}
+																			</ul>
+																			<p>test</p>
+																		</div>
+																	</section>
+																</div>
+															) : (
+																<div className="grid grid-cols-1 gap-4 lg:col-span-2 overflow-auto">
+																	{/* POST PANEL */}
+																	<section aria-labelledby="quick-links-title">
+																		<div className="bg-white w-full  rounded-lg">
+																			<h1>This user has no posts.</h1>
+																		</div>
+																	</section>
+																</div>
+															)}
 														</div>
 													</dl>
 												</div>
