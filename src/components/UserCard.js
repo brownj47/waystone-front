@@ -5,7 +5,7 @@ export default function UserCard(person) {
 		<li key={person.username} className="py-4">
 			<div className="flex items-center space-x-4">
 				<div className="flex-shrink-0">
-					<img className="h-8 w-8 rounded-full" src={person.imageUrl} alt="" />
+					<img className="h-8 w-8 rounded-full" src={person.friend.img_url} alt="" />
 				</div>
 				<div className="min-w-0 flex-1">
 					<p className="truncate text-sm font-medium text-gray-900">
