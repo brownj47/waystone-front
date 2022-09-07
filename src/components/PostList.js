@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import API from '../utils/API';
 import PostCard from './PostCard';
 
-function PostList() {
+function PostList(props) {
 	// post hooks
 	const [allPosts, setAllPosts] = useState([]);
 	useEffect(() => {
@@ -20,7 +20,7 @@ function PostList() {
 				<div className="bg-white w-full  rounded-lg">
 					<ul role="list" className="divide-y divide-lime-400">
 						{allPosts.map((post) => (
-							<PostCard {...post} key={post._id} />
+							<PostCard {...post} key={post._id} user={props.user}/>
 						))}
 					</ul>
 				</div>

@@ -165,20 +165,11 @@ export function Home(props) {
 												<Menu.Items className="absolute -right-2 z-10 mt-2 w-48 origin-top-right rounded-md bg-lime-200 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 													<Menu.Item>
 														<a
-															href={'/profile'}
+															href={'/waystone-front/profile'}
 															className="block px-4 py-2 text-sm text-gray-700"
 															onClick={() => {}}
 														>
 															Your Profile
-														</a>
-													</Menu.Item>
-													<Menu.Item>
-														<a
-															href={'#'}
-															className="block px-4 py-2 text-sm text-gray-700"
-															onClick={() => {}}
-														>
-															Settings
 														</a>
 													</Menu.Item>
 													<Menu.Item>
@@ -212,12 +203,7 @@ export function Home(props) {
 													>
 														Profile
 													</Link>
-													<Link
-														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-														to={'/waystone-front/friends'}
-													>
-														Friends
-													</Link>
+
 													<Link
 														className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
 														to={'/waystone-front/groups'}
@@ -325,12 +311,7 @@ export function Home(props) {
 														>
 															Profile
 														</Link>
-														<Link
-															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
-															to={'/waystone-front/friends'}
-														>
-															Friends
-														</Link>
+
 														<Link
 															className="text-zinc-800 text-sm font-medium rounded-md bg-lime-200  px-3 py-2 hover:bg-lime-200"
 															to={'/waystone-front/groups'}
@@ -356,31 +337,13 @@ export function Home(props) {
 																{userObj.email}
 															</div>
 														</div>
-														<button
-															type="button"
-															className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:ring-offset-2"
-														>
-															<span className="sr-only">
-																View notifications
-															</span>
-															<BellIcon
-																className="h-6 w-6"
-																aria-hidden="true"
-															/>
-														</button>
 													</div>
 													<div className="mt-3 space-y-1 px-2">
 														<a
-															href={'#'}
+															href={'/waystone-front/profile'}
 															className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
 														>
 															Your Profile
-														</a>
-														<a
-															href={'#'}
-															className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-														>
-															Settings
 														</a>
 														<a
 															href={'#'}
@@ -406,7 +369,7 @@ export function Home(props) {
 						{/* Main 3 column grid */}
 						<div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 overflow-auto ">
 							{/* Left column */}
-							<PostList />
+							<PostList user={userObj} />
 
 							{/* Right column */}
 							<div className="grid grid-cols-1 gap-4 m-2">
@@ -420,7 +383,7 @@ export function Home(props) {
 								) : (
 									<></>
 								)}
-								<FriendRequestList />
+								<FriendRequestList user={userObj} />
 							</div>
 						</div>
 					</div>
@@ -543,7 +506,7 @@ export function Home(props) {
 																						<Menu.Item>
 																							{({ active }) => (
 																								<a
-																									href="#"
+																									href="/waystone-front/profile"
 																									className={classNames(
 																										active
 																											? 'bg-lime-200  text-black'
@@ -586,7 +549,11 @@ export function Home(props) {
 																				className="divide-y divide-lime-400"
 																			>
 																				{randUserObj.posts.map((post) => (
-																					<PostCard {...post} key={post._id} />
+																					<PostCard
+																						{...post}
+																						user={userObj}
+																						key={post._id}
+																					/>
 																				))}
 																			</ul>
 																			<p>test</p>
