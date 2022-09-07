@@ -300,27 +300,6 @@ export default function GroupPage(props) {
 															/>
 														</button>
 													</div>
-													<div className="mt-3 space-y-1 px-2">
-														<a
-															href={'#'}
-															className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-														>
-															Your Profile
-														</a>
-														<a
-															href={'#'}
-															className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-														>
-															Settings
-														</a>
-														<a
-															href={'#'}
-															className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-															onClick={props.handleLogout}
-														>
-															Logout
-														</a>
-													</div>
 												</div>
 											</div>
 										</Popover.Panel>
