@@ -106,6 +106,9 @@ export function Home(props) {
 	return (
 		<>
 			<div className="min-h-full">
+			<h1 className="mt-6 text-center text-6xl font-bold tracking-tight text-zinc-800 bg-gradient-to-r from-lime-500 to-lime-400 rounded-md border border-transparent">
+							Mordekainen's Waystone: Find Your Party
+						</h1>
 				<Popover
 					as="header"
 					className="bg-gradient-to-r from-lime-500 to-lime-400 pb-24"
@@ -556,7 +559,7 @@ export function Home(props) {
 																					/>
 																				))}
 																			</ul>
-																			<p>test</p>
+																			
 																		</div>
 																	</section>
 																</div>
