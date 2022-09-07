@@ -417,7 +417,7 @@ export function Home(props) {
 								) : (
 									<></>
 								)}
-								<FriendRequestList />
+								<FriendRequestList user={userObj} />
 							</div>
 						</div>
 					</div>
@@ -575,7 +575,7 @@ export function Home(props) {
 																	<div className="bg-white w-full  rounded-lg">
 																		<ul role="list" className="divide-y divide-lime-400">
 																			{randUserObj.posts.map((post) => (
-																				<PostCard {...post} key={post._id} />
+																				<PostCard {...post} user={userObj} key={post._id} />
 																			))}
 																		</ul>
 																		<p>test</p>
