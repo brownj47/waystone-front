@@ -106,18 +106,10 @@ export default function GroupPage(props) {
                                                 <Menu.Items className="absolute -right-2 z-10 mt-2 w-48 origin-top-right rounded-md bg-lime-200 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                     <Menu.Item>
                                                         <a
-                                                            href={'/profile'}
+                                                            href={'/waystone-front/profile'}
                                                             className='block px-4 py-2 text-sm text-gray-700'
                                                             onClick={() => { }}
                                                         >Your Profile</a>
-
-                                                    </Menu.Item>
-                                                    <Menu.Item>
-                                                        <a
-                                                            href={'#'}
-                                                            className='block px-4 py-2 text-sm text-gray-700'
-                                                            onClick={() => { }}
-                                                        >Settings</a>
 
                                                     </Menu.Item>
                                                     <Menu.Item>
@@ -141,7 +133,7 @@ export default function GroupPage(props) {
                                                 <nav className="flex space-x-4">
                                                     <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/home'}>Home</Link>
                                                     <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/profile'}>Profile</Link>
-                                                    <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/friends'}>Friends</Link>
+                                                   
                                                     <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/groups'}>Groups</Link>
                                                 </nav>
                                             </div>
@@ -242,7 +234,6 @@ export default function GroupPage(props) {
                                                     <div className="mt-3 space-y-1 px-2">
                                                         <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/home'}>Home</Link>
                                                         <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/profile'}>Profile</Link>
-                                                        <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/friends'}>Friends</Link>
                                                         <Link className='text-zinc-800 text-sm font-medium rounded-md bg-lime-200 bg-opacity-0 px-3 py-2 hover:bg-opacity-10' to={'/waystone-front/groups'}>Groups</Link>
                                                     </div>
                                                 </div>
@@ -278,16 +269,10 @@ export default function GroupPage(props) {
                                                     </div>
                                                     <div className="mt-3 space-y-1 px-2">
                                                         <a
-                                                            href={'#'}
+                                                            href={'/waystone-front/profile'}
                                                             className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
                                                         >
                                                             Your Profile
-                                                        </a>
-                                                        <a
-                                                            href={'#'}
-                                                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-                                                        >
-                                                            Settings
                                                         </a>
                                                         <a
                                                             href={'#'}
