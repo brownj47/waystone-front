@@ -9,11 +9,11 @@ let logoUrl = '';
 export default function CreateUser(props) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		props.handleUserCreate(email, password, username, bio, img_url);
-		setBio('');
+		props.handleUserCreate(username, email, password, bio, img_url);
 		setUsername('');
-		setPassword('');
 		setEmail('');
+		setPassword('');
+		setBio('');
 		setImg_url('');
 	};
 	const [username, setUsername] = useState('');

@@ -15,6 +15,7 @@ import GroupPage from './pages/groupPage';
 import Login from './pages/login';
 import API from './utils/API';
 import { data } from 'autoprefixer';
+import Profile from './pages/profile';
 
 const URL_PREFIX = 'https://waystoneapi.herokuapp.com/';
 
@@ -102,15 +103,11 @@ const App = () => {
 		});
 	};
 
-	const handleUserCreate = async (email, password, username, bio, img_url) => {
+	const handleUserCreate = async (username, email, password, bio, img_url) => {
 		setUser((user) => {
 			// https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
 			const modifiedValue = {
-				email,
-				password,
-				username,
-				bio,
-				img_url,
+				username, email, password, bio, img_url
 			};
 			const foundUser = {};
 			console.log(modifiedValue);
@@ -198,6 +195,45 @@ const App = () => {
 		checkToken(storedToken);
 	}, []);
 
+	// edit profile page
+	const handleEditUser = async (UserId, username, email, password, bio, img_url)=>{
+		setUser((user) => { // https://betterprogramming.pub/synchronous-state-in-react-using-hooks-dc77f43d8521
+			const modifiedValue = {
+				UserId, username, email, password, bio, img_url
+			}
+			const updatedUser = {};
+			console.log(modifiedValue);
+			API.updateUser(UserId, username, email, password, bio, img_url) 
+			
+			.then(res => {
+				console.log('==============================================')
+				console.log(res);
+				console.log('==============================================')
+				console.log('==============================================')
+				if (!res.ok) {
+					setUser({ username: "", email: "" });
+					setToken("")
+					return;
+				}
+				
+				return res.json()
+				
+			}).then((data) => {
+				console.log('==============================================')
+				console.log(data)
+				updatedUser.email = data.user.email
+				updatedUser.username = data.user.username
+				updatedUser.img_url = data.user.img_url
+				updatedUser.UserId = data.user._id
+				updatedUser.bio = data.user.bio
+				setToken(data.token)
+				localStorage.setItem('token', JSON.stringify(data.token))
+				navigate('/home')
+			})
+			return updatedUser;
+		})
+	}
+
 	return (
 		<>
 			<Routes>
@@ -224,7 +260,9 @@ const App = () => {
 					path="/waystone-front/login"
 					element={<Login handleLogin={handleLogin} />}
 				/>
+				<Route path="/waystone-front/profile" element={<Profile user={user} handleLogout={handleLogout} handleEditUser={handleEditUser}/>} />
 				<Route path="/waystone-front/*" element={<h1>404 Page Not Found</h1>} />
+				
 			</Routes>
 
 			<footer className="bg-zinc-800 h-96 p-5">
